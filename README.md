@@ -48,11 +48,36 @@ không trích lại tài liệu cũ.
 
 | File | |
 |---|---|
-| `index.html` | trang xem — hai tab, phóng to, kéo thả. Chạy được cả khi mở offline sau khi clone |
+| `index.html` | trang xem — **sinh ra từ `build.py`, đừng sửa tay**. Mở offline cũng chạy |
+| `build.py` | nhúng nội dung SVG thẳng vào `index.html`. Sửa sơ đồ xong thì chạy lại |
 | `db-va-luong-chay-v2.svg` | sơ đồ ① — bản vector, phóng to bao nhiêu cũng nét |
 | `db-va-luong-chay-v2@2x.png` | sơ đồ ① — 4160×3000, để dán vào tài liệu |
 | `van-de-ver1-v1.svg` | sơ đồ ② — bản vector |
 | `van-de-ver1-v1@2x.png` | sơ đồ ② — 4000×2840 |
+
+### Thao tác trên trang
+
+| | |
+|---|---|
+| Bôi đen chữ | kéo chuột trái như văn bản thường |
+| Tìm chữ | `Ctrl`+`F` của trình duyệt — chữ trong sơ đồ là text thật |
+| Cuộn | lăn chuột / thanh cuộn |
+| Kéo sơ đồ | giữ `Space` rồi kéo, hoặc chuột giữa |
+| Phóng to | `Ctrl`+lăn, hoặc nút `+` `−`, hoặc phím `+` `−` |
+| `F` | vừa bề ngang · `1` — kích thước thật |
+
+### Vì sao nhúng SVG vào DOM thay vì dùng `<img>`
+
+Thẻ `<img src="x.svg">` coi SVG là **ảnh thay thế**: không có DOM, nên không bôi đen
+được chữ, không `Ctrl`+`F` được. Và nếu phóng to bằng `transform: scale()` thì trình
+duyệt nướng thành raster ở 1× rồi kéo giãn — chữ mờ, tức là "SVG nhưng dùng như PNG".
+
+Nhúng thẳng vào DOM thì chữ là text thật, và trang phóng to bằng `width`/`height` nên
+vector được vẽ lại ở mọi mức phóng, luôn nét.
+
+Hai SVG dùng **trùng tên lớp** (`.t` `.s` `.n` `.warn`…) với giá trị khác nhau — `.t12`
+là 12px ở sơ đồ ① nhưng 12,5px ở sơ đồ ②. Chung một trang thì CSS đè lên nhau, nên
+`build.py` gắn tiền tố `#d0` / `#d1` cho từng luật.
 
 ## Luật đặt tên
 
