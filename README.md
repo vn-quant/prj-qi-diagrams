@@ -57,14 +57,19 @@ không trích lại tài liệu cũ.
 
 ### Thao tác trên trang
 
+Hai chế độ, đổi bằng nút trên thanh công cụ. **Mặc định là kéo thả** — sơ đồ khổ lớn
+nên cuộn ngang rất bất tiện.
+
 | | |
 |---|---|
-| Bôi đen chữ | kéo chuột trái như văn bản thường |
-| Tìm chữ | `Ctrl`+`F` của trình duyệt — chữ trong sơ đồ là text thật |
-| Cuộn | lăn chuột / thanh cuộn |
-| Kéo sơ đồ | giữ `Space` rồi kéo, hoặc chuột giữa |
-| Phóng to | `Ctrl`+lăn, hoặc nút `+` `−`, hoặc phím `+` `−` |
-| `F` | vừa bề ngang · `1` — kích thước thật |
+| ✋ **kéo** (mặc định, phím `H`) | kéo chuột trái để di chuyển, giống công cụ bàn tay của trình xem PDF |
+| ⌶ **chọn chữ** (phím `V`) | kéo chuột trái để bôi đen văn bản |
+| Chuột giữa · giữ `Space` | luôn kéo được, ở **cả hai** chế độ |
+| `Ctrl`+`F` | tìm chữ — hoạt động ở cả hai chế độ, vì chữ là text thật |
+| Phóng to | `Ctrl`+lăn, nút `+` `−`, hoặc phím `+` `−` |
+| `F` vừa bề ngang · `1` kích thước thật | |
+
+Chạm tay trên điện thoại/tablet vẫn cuộn tự nhiên — trang không cướp sự kiện cảm ứng.
 
 ### Vì sao nhúng SVG vào DOM thay vì dùng `<img>`
 
