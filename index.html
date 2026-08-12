@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRJ Quantitative Investment — Sơ đồ tầng dữ liệu</title>
+<style>
+  :root{
+    --bg:#0f172a; --panel:#111c33; --line:#1e293b; --edge:#334155;
+    --fg:#e2e8f0; --dim:#94a3b8; --cy:#22d3ee; --em:#34d399;
+    --am:#fbbf24; --ro:#fb7185; --bl:#60a5fa;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:14px/1.55 'JetBrains Mono','SF Mono','Cascadia Code',Consolas,monospace;
+    overflow:hidden;
+  }
+  header{
+    position:fixed; inset:0 0 auto 0; z-index:20; background:rgba(15,23,42,.96);
+    border-bottom:1px solid var(--edge); backdrop-filter:blur(8px);
+  }
+  .bar{display:flex; align-items:center; gap:14px; padding:9px 16px; flex-wrap:wrap}
+  .brand{font-weight:700; font-size:14px; white-space:nowrap}
+  .brand span{color:var(--dim); font-weight:400; font-size:11px}
+  .tabs{display:flex; gap:6px}
+  .tab{
+    background:transparent; color:var(--dim); border:1px solid var(--edge);
+    padding:5px 12px; border-radius:6px; cursor:pointer; font:inherit; font-size:12px;
+    white-space:nowrap; transition:.12s;
+  }
+  .tab:hover{color:var(--fg); border-color:#475569}
+  .tab[aria-selected="true"]{
+    background:rgba(59,130,246,.22); color:#fff; border-color:var(--bl);
+  }
+  .spacer{flex:1}
+  .tools{display:flex; align-items:center; gap:6px}
+  .btn{
+    background:rgba(30,41,59,.7); color:var(--fg); border:1px solid var(--edge);
+    width:30px; height:28px; border-radius:6px; cursor:pointer; font:inherit; font-size:13px;
+    display:grid; place-items:center; transition:.12s;
+  }
+  .btn:hover{border-color:var(--cy); color:var(--cy)}
+  .btn.w{width:auto; padding:0 10px; font-size:11px}
+  .pct{
+    min-width:52px; text-align:center; font-size:11px; color:var(--dim);
+    font-variant-numeric:tabular-nums;
+  }
+  .dl{color:var(--dim); font-size:11px; text-decoration:none; border-bottom:1px dotted #475569}
+  .dl:hover{color:var(--cy); border-color:var(--cy)}
+
+  .meta{
+    padding:0 16px 9px; font-size:11px; color:var(--dim);
+    display:flex; gap:8px; flex-wrap:wrap; align-items:baseline;
+  }
+  .meta b{color:var(--fg); font-weight:600}
+  .dot{color:var(--edge)}
+
+  main{position:absolute; inset:0; padding-top:var(--hh,86px)}
+  .stage{
+    position:absolute; inset:var(--hh,86px) 0 0 0; overflow:hidden;
+    cursor:grab; background:
+      radial-gradient(circle at 1px 1px, #1e293b 1px, transparent 0) 0 0/40px 40px;
+  }
+  .stage.drag{cursor:grabbing}
+  .stage[hidden]{display:none}
+  .canvas{position:absolute; top:0; left:0; transform-origin:0 0; will-change:transform}
+  .canvas img{display:block; max-width:none; user-select:none; -webkit-user-drag:none}
+
+  .hint{
+    position:fixed; right:14px; bottom:12px; z-index:15; font-size:10.5px; color:var(--dim);
+    background:rgba(15,23,42,.92); border:1px solid var(--edge); border-radius:6px;
+    padding:6px 10px; pointer-events:none;
+  }
+  kbd{
+    background:rgba(51,65,85,.8); border:1px solid #475569; border-radius:3px;
+    padding:0 4px; font:inherit; font-size:10px; color:var(--fg);
+  }
+  @media (max-width:760px){ .meta{display:none} .hint{display:none} }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="bar">
+    <div class="brand">PRJ Quantitative Investment <span>· sơ đồ tầng dữ liệu</span></div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true"  data-v="0">① Kiến trúc DB &amp; luồng chạy</button>
+      <button class="tab" role="tab" aria-selected="false" data-v="1">② Vấn đề ver 1</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="tools">
+      <button class="btn" id="out"  title="Thu nhỏ (−)">−</button>
+      <div class="pct" id="pct">100%</div>
+      <button class="btn" id="in"   title="Phóng to (+)">+</button>
+      <button class="btn w" id="fit"  title="Vừa khung (F)">vừa khung</button>
+      <button class="btn w" id="one"  title="Kích thước thật (1)">100%</button>
+      <a class="dl" id="dlsvg" href="db-va-luong-chay-v2.svg" download>SVG</a>
+      <a class="dl" id="dlpng" href="db-va-luong-chay-v2@2x.png" download>PNG</a>
+    </div>
+  </div>
+  <div class="meta" id="meta"></div>
+</header>
+
+<main>
+  <div class="stage" id="s0">
+    <div class="canvas" id="c0"><img src="db-va-luong-chay-v2.svg" alt="Kiến trúc DB và luồng chạy hằng ngày ver 2"></div>
+  </div>
+  <div class="stage" id="s1" hidden>
+    <div class="canvas" id="c1"><img src="van-de-ver1-v1.svg" alt="Vấn đề của ver 1 và khuôn lỗi còn sống trong ver 2"></div>
+  </div>
+</main>
+
+<div class="hint">lăn chuột = phóng to · kéo = di chuyển · <kbd>F</kbd> vừa khung · <kbd>1</kbd> 100%</div>
+
+<script>
+const VIEWS = [
+  { svg:'db-va-luong-chay-v2.svg', png:'db-va-luong-chay-v2@2x.png',
+    meta:'<b>db-va-luong-chay-v2</b><span class="dot">·</span>2026-08-09<span class="dot">·</span>4 tầng dữ liệu + 8 bước job 17:30, kèm tên file code và logic từng bước<span class="dot">·</span>số liệu đo từ quant_v2' },
+  { svg:'van-de-ver1-v1.svg', png:'van-de-ver1-v1@2x.png',
+    meta:'<b>van-de-ver1-v1</b><span class="dot">·</span>2026-08-09<span class="dot">·</span>chẩn đoán gốc → 6 nhánh hỏng → khuôn lỗi chung → 4 khuôn còn sống trong ver 2' }
+];
+const MIN = .05, MAX = 8;
+const st = [ {z:1,x:0,y:0,ready:false}, {z:1,x:0,y:0,ready:false} ];
+let cur = 0;
+
+const $ = id => document.getElementById(id);
+const stage = i => $('s'+i), canvas = i => $('c'+i), img = i => canvas(i).querySelector('img');
+
+function headerH(){
+  const h = $('hdr').offsetHeight;
+  document.documentElement.style.setProperty('--hh', h+'px');
+}
+function apply(i){
+  const s = st[i];
+  canvas(i).style.transform = `translate(${s.x}px, ${s.y}px) scale(${s.z})`;
+  if (i === cur) $('pct').textContent = Math.round(s.z*100)+'%';
+}
+function natural(i){
+  const im = img(i);
+  return { w: im.naturalWidth || im.width, h: im.naturalHeight || im.height };
+}
+function fit(i){
+  const st_ = stage(i), n = natural(i);
+  if (!n.w || !n.h) return;
+  const pad = 24;
+  const z = Math.min((st_.clientWidth-pad*2)/n.w, (st_.clientHeight-pad*2)/n.h);
+  st[i].z = Math.max(MIN, Math.min(MAX, z));
+  st[i].x = (st_.clientWidth  - n.w*st[i].z)/2;
+  st[i].y = (st_.clientHeight - n.h*st[i].z)/2;
+  apply(i);
+}
+function actual(i){
+  const st_ = stage(i), n = natural(i);
+  st[i].z = 1;
+  st[i].x = (st_.clientWidth  - n.w)/2;
+  st[i].y = (st_.clientHeight - n.h)/2;
+  apply(i);
+}
+function zoomAt(i, factor, cx, cy){
+  const s = st[i];
+  const nz = Math.max(MIN, Math.min(MAX, s.z*factor));
+  const k = nz/s.z;
+  s.x = cx - (cx - s.x)*k;
+  s.y = cy - (cy - s.y)*k;
+  s.z = nz;
+  apply(i);
+}
+function centerZoom(f){
+  const st_ = stage(cur);
+  zoomAt(cur, f, st_.clientWidth/2, st_.clientHeight/2);
+}
+
+// pan
+[0,1].forEach(i => {
+  const st_ = stage(i);
+  let down = false, px = 0, py = 0;
+  st_.addEventListener('pointerdown', e => {
+    down = true; px = e.clientX; py = e.clientY;
+    st_.classList.add('drag'); st_.setPointerCapture(e.pointerId);
+  });
+  st_.addEventListener('pointermove', e => {
+    if (!down) return;
+    st[i].x += e.clientX - px; st[i].y += e.clientY - py;
+    px = e.clientX; py = e.clientY; apply(i);
+  });
+  const up = e => { down = false; st_.classList.remove('drag'); };
+  st_.addEventListener('pointerup', up);
+  st_.addEventListener('pointercancel', up);
+  st_.addEventListener('wheel', e => {
+    e.preventDefault();
+    const r = st_.getBoundingClientRect();
+    zoomAt(i, e.deltaY < 0 ? 1.12 : 1/1.12, e.clientX - r.left, e.clientY - r.top);
+  }, { passive:false });
+  st_.addEventListener('dblclick', e => {
+    const r = st_.getBoundingClientRect();
+    zoomAt(i, 1.6, e.clientX - r.left, e.clientY - r.top);
+  });
+  img(i).addEventListener('load', () => {
+    if (!st[i].ready) { st[i].ready = true; fit(i); }
+  });
+  if (img(i).complete && img(i).naturalWidth) { st[i].ready = true; }
+});
+
+function show(i){
+  cur = i;
+  [0,1].forEach(k => stage(k).hidden = (k !== i));
+  document.querySelectorAll('.tab').forEach(t =>
+    t.setAttribute('aria-selected', String(+t.dataset.v === i)));
+  $('meta').innerHTML = VIEWS[i].meta;
+  $('dlsvg').href = VIEWS[i].svg;
+  $('dlpng').href = VIEWS[i].png;
+  headerH();
+  if (!st[i].ready && img(i).complete && img(i).naturalWidth) st[i].ready = true;
+  if (st[i].ready && st[i].z === 1 && st[i].x === 0 && st[i].y === 0) fit(i); else apply(i);
+}
+
+document.querySelectorAll('.tab').forEach(t =>
+  t.addEventListener('click', () => show(+t.dataset.v)));
+$('in').onclick  = () => centerZoom(1.25);
+$('out').onclick = () => centerZoom(1/1.25);
+$('fit').onclick = () => fit(cur);
+$('one').onclick = () => actual(cur);
+
+addEventListener('keydown', e => {
+  if (e.target.matches('input,textarea')) return;
+  const k = e.key.toLowerCase();
+  if (k === 'f') fit(cur);
+  else if (k === '1') actual(cur);
+  else if (k === '+' || k === '=') centerZoom(1.25);
+  else if (k === '-' || k === '_') centerZoom(1/1.25);
+  else if (k === 'arrowright' || k === 'arrowleft') show(cur === 0 ? 1 : 0);
+});
+addEventListener('resize', () => { headerH(); fit(cur); });
+
+headerH();
+show(0);
+[0,1].forEach(i => { if (st[i].ready) fit(i); });
+</script>
+</body>
+</html>
