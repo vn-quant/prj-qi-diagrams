@@ -37,9 +37,11 @@ def boc(path: Path, sid: str):
     css_tho = m.group(1) if m else ""
     s = s[:m.start()] + s[m.end():] if m else s
 
-    # @import di ra cap tai lieu, khong gan tien to
-    imports = re.findall(r"@import[^;]+;", css_tho)
-    css_tho = re.sub(r"@import[^;]+;", "", css_tho)
+    # Bo @import cua SVG — font do TEMPLATE khai mot lan, dung mot cho.
+    # PHAI bat den ");" chu KHONG duoc bat den ";" dau tien: dau ";" dau tien nam
+    # GIUA url font (wght@400;500;600;700), cat o do se de lai dau nhay khong dong
+    # va nuot sach stylesheet phia sau — da lam ca trang mat CSS, chu den tren nen toi.
+    css_tho = re.sub(r"@import\s+url\([^)]*\)\s*;", "", css_tho)
 
     # gan tien to cho tung luat:  ".t { ... }"  ->  "#d0 .t { ... }"
     def gan(mm):
@@ -56,18 +58,21 @@ def boc(path: Path, sid: str):
     tag_moi = tag_moi.replace("<svg", f'<svg id="{sid}"', 1)
     s = s.replace(tag, tag_moi, 1)
 
-    return s.strip(), css, rong, cao, imports
+    return s.strip(), css, rong, cao
 
 
-noi_dung, css_all, imports_all = [], [], []
+noi_dung, css_all = [], []
 for d in DIAGRAMS:
-    svg, css, w, h, imps = boc(HERE / d["svg"], d["id"])
+    svg, css, w, h = boc(HERE / d["svg"], d["id"])
     d["w"], d["h"] = w, h
     noi_dung.append(svg)
     css_all.append(f"/* ── {d['name']} ── */\n{css}")
-    imports_all += imps
 
-imports = "\n  ".join(dict.fromkeys(imports_all))
+# Font khai MOT lan, o day, viet dung chuan HTML: dung "&" chu khong phai "&amp;"
+# (trong the <style> cua HTML, noi dung la van ban tho — "&amp;" khong duoc giai ma
+#  nen se lot nguyen vao URL va lam hong duong dan font).
+FONT = ("@import url('https://fonts.googleapis.com/css2?"
+        "family=JetBrains+Mono:wght@400;500;600;700&display=swap');")
 
 tabs = "\n      ".join(
     f'<button class="tab" role="tab" aria-selected="{"true" if i == 0 else "false"}" data-v="{i}">{d["tab"]}</button>'
@@ -91,7 +96,7 @@ html = f"""<!doctype html>
 <title>PRJ Quantitative Investment — Sơ đồ tầng dữ liệu</title>
 <!-- TRANG NAY SINH TU build.py — dung sua tay, sua roi chay lai se mat. -->
 <style>
-  {imports}
+  {FONT}
   :root{{
     --bg:#0f172a; --edge:#334155; --fg:#e2e8f0; --dim:#94a3b8;
     --cy:#22d3ee; --bl:#60a5fa;
