@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nguồn dữ liệu — PRJ Quantitative Investment</title>
+<!-- SINH TU build_nguon.py — dung sua tay -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+  :root{--bg:#0f172a;--pn:#111c33;--edge:#334155;--fg:#e2e8f0;--dim:#94a3b8;
+        --cy:#22d3ee;--em:#34d399;--am:#fbbf24;--ro:#fb7185;--vi:#a78bfa}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:13px/1.6 'JetBrains Mono','SF Mono',Consolas,monospace;padding:28px 20px 60px}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:20px;margin:0 0 6px}
+  .sub{color:var(--dim);font-size:12px;margin:0 0 4px}
+  .tong{color:var(--dim);font-size:12px;margin:0 0 26px}
+  .tong b{color:var(--em)}
+  h2{font-size:15px;margin:34px 0 4px;padding-bottom:7px;border-bottom:1px solid var(--edge)}
+  .dem{color:var(--dim);font-weight:400;font-size:11px;margin-left:8px}
+  .mota{color:var(--dim);font-size:11px;margin:0 0 12px}
+  details.cua{background:var(--pn);border:1px solid var(--edge);border-left-width:3px;
+              border-radius:7px;margin-bottom:7px}
+  details.dung{border-left-color:var(--em)}
+  details.chua{border-left-color:var(--am)}
+  details.hong{border-left-color:var(--ro)}
+  details.khong{border-left-color:#64748b}
+  summary{cursor:pointer;padding:10px 13px;list-style:none;display:flex;
+          align-items:center;gap:10px;flex-wrap:wrap}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:'▸';color:var(--dim);font-size:11px;transition:.15s}
+  details[open] summary::before{transform:rotate(90deg)}
+  details[open] summary{border-bottom:1px solid var(--edge)}
+  .ten{font-weight:600;color:#fff}
+  .badge{font-size:10px;padding:1px 7px;border-radius:99px;border:1px solid}
+  .badge.dung{color:var(--em);border-color:var(--em)}
+  .badge.chua{color:var(--am);border-color:var(--am)}
+  .badge.hong{color:var(--ro);border-color:var(--ro)}
+  .badge.khong{color:#94a3b8;border-color:#64748b}
+  .sot{font-size:11px;color:var(--cy)}
+  .host,.meta{font-size:10.5px;color:var(--dim)}
+  .meta{margin-left:auto}
+  .than{padding:12px 13px 15px}
+  .gc{color:var(--am);font-size:11.5px;margin:0 0 12px}
+  .nhan-nho{font-size:10px;color:var(--dim);letter-spacing:.09em;margin:13px 0 5px}
+  .nhan-nho:first-of-type{margin-top:0}
+  pre{background:#0b1220;border:1px solid var(--edge);border-radius:6px;
+      padding:10px 12px;overflow-x:auto;font-size:11px;margin:0;color:#cbd5e1}
+  pre.goi{color:var(--cy)}
+  .fs{display:flex;flex-wrap:wrap;gap:5px}
+  .f{background:rgba(167,139,250,.13);border:1px solid rgba(167,139,250,.4);
+     color:#ddd6fe;border-radius:4px;padding:2px 7px;font-size:10.5px}
+  .f.trong{background:none;border-color:var(--edge);color:var(--dim)}
+  footer{margin-top:40px;color:var(--dim);font-size:10.5px;border-top:1px solid var(--edge);padding-top:14px}
+  @media(max-width:700px){.meta{margin-left:0;width:100%}}
+</style>
+</head>
+<body><div class="wrap">
+<h1>Nguồn dữ liệu — 4 nhà cung cấp</h1>
+<p class="sub">PRJ Quantitative Investment · kiểm kê theo HOST, không theo endpoint</p>
+<p class="tong"><b>18</b> cửa · <b>16</b> gọi ra dữ liệu · đo thật ngày 2026-08-13 —
+mỗi cửa dưới đây đều được gọi một lần để lấy tên trường và mẫu trả về. Bấm để mở.</p>
+
+<section>
+  <h2>SSI <span class="dem">7 cửa · 6 sống</span></h2>
+  <p class="mota">iboard-api.ssi.com.vn (công khai) · fc-data.ssi.com.vn (FastConnect, cần Bearer)</p>
+  
+<details class="cua dung">
+  <summary>
+    <span class="ten">/statistics/charts/history</span>
+    <span class="badge dung">đang dùng</span>
+    <span class="sot">8 trường</span>
+    <span class="host">iboard-api.ssi.com.vn</span>
+    <span class="meta">kho: <b>666,957</b> dòng · kVND · ADJUSTED · sâu từ 2000-07-28 · <b>CHINH</b></span>
+  </summary>
+  <div class="than">
+    <p class="gc">gia DIEU CHINH · kVND · sau toi 2000-07-28 · NGUON CHINH</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET iboard-api.ssi.com.vn/statistics/charts/history
+{"symbol": "VNM", "resolution": "1D", "from": 1785715200, "to": 1786060800}</pre>
+    <div class="nhan-nho">TRƯỜNG (8)</div><div class="fs"><span class=f>t</span><span class=f>c</span><span class=f>o</span><span class=f>h</span><span class=f>l</span><span class=f>v</span><span class=f>s</span><span class=f>nextTime</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "t": [
+  1785715200,
+  1785801600,
+  1785888000
+ ],
+ "c": [
+  60.3,
+  59.5,
+  58.6
+ ],
+ "o": [
+  60.9,
+  60.4,
+  59.4
+ ],
+ "h": [
+  61,
+  60.4,
+  60.1
+ ],
+ "l": [
+  60,
+  59,
+  58.6
+ ],
+ "v": [
+  6377600,
+  5531900,
+  5288700
+ ],
+ "s": "ok",
+ "nextTime": null
+}</pre>
+  </div>
+</details>
+<details class="cua dung">
+  <summary>
+    <span class="ten">/statistics/company/stock-price</span>
+    <span class="badge dung">đang dùng</span>
+    <span class="sot">31 trường</span>
+    <span class="host">iboard-api.ssi.com.vn</span>
+    <span class="meta">kho: <b>581,055</b> dòng · VND · RAW · sâu từ 2000-01-01 · <b>BO_TRO</b></span>
+  </summary>
+  <div class="than">
+    <p class="gc">gia THO + TRAN/SAN + khoi ngoai · VND · TRON THANG: O/H/L da dieu chinh</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET iboard-api.ssi.com.vn/statistics/company/stock-price
+{"symbol": "VNM", "pageIndex": 1, "pageSize": 1, "fromDate": "11/08/2026", "toDate": "11/08/2026"}</pre>
+    <div class="nhan-nho">TRƯỜNG (31)</div><div class="fs"><span class=f>tradingDate</span><span class=f>priceChange</span><span class=f>perPriceChange</span><span class=f>ceilingPrice</span><span class=f>floorPrice</span><span class=f>refPrice</span><span class=f>openPrice</span><span class=f>highestPrice</span><span class=f>lowestPrice</span><span class=f>closePrice</span><span class=f>averagePrice</span><span class=f>closePriceAdjusted</span><span class=f>totalMatchVol</span><span class=f>totalMatchVal</span><span class=f>totalDealVal</span><span class=f>totalDealVol</span><span class=f>foreignBuyVolTotal</span><span class=f>foreignCurrentRoom</span><span class=f>foreignSellVolTotal</span><span class=f>foreignBuyValTotal</span><span class=f>foreignSellValTotal</span><span class=f>totalBuyTrade</span><span class=f>totalBuyTradeVol</span><span class=f>totalSellTrade</span><span class=f>totalSellTradeVol</span><span class=f>netBuySellVol</span><span class=f>netBuySellVal</span><span class=f>exchange</span><span class=f>symbol</span><span class=f>foreignBuyVolMatched</span><span class=f>foreignBuyVolDeal</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "tradingDate": "11/08/2026 00:00:00",
+ "priceChange": "-100.0",
+ "perPriceChange": "-0.0016103100",
+ "ceilingPrice": "66400.0",
+ "floorPrice": "57800.0",
+ "refPrice": "62100.0000000000",
+ "openPrice": "62500.0000000000",
+ "highestPrice": "63300.0000000000",
+ "lowestPrice": "61800.0000000000",
+ "closePrice": "62000.0",
+ "averagePrice": "0.0",
+ "closePriceAdjusted": "62000.0000000000",
+ "totalMatchVol": "4486430.0",
+ "totalMatchVal": "280409245500.0",
+ "totalDealVal": "0.0",
+ "totalDealVol": "0.0",
+ "foreignBuyVolTotal": "1284020.0",
+ "foreignCurrentRoom": "1054584139",
+ "foreignSellVolTotal": "317546.0",
+ "foreignBuyValTotal": "80363054000.0",
+ "foreignSellValTotal": "19850388500.0",
+ "totalBuyTrade": "5335",
+ "totalBuyTradeVol": "7371302.0",
+ "totalSellTrade": "6667",
+ "totalSellTradeVol": "9646040.0",
+ "netBuySellVol": "966474",
+ "netBuySellVal": "60512665500",
+ "exchange": "0",
+ "symbol": "VNM",
+ "foreignBuyVolMatched": "1284020.0",
+ "foreignBuyVolDeal": "0.0"
+}</pre>
+  </div>
+</details>
+<details class="cua hong">
+  <summary>
+    <span class="ten">/statistics/charts/history/foreign-trading-history</span>
+    <span class="badge hong">gọi không ra dữ liệu</span>
+    <span class="sot">0 trường</span>
+    <span class="host">iboard-api.ssi.com.vn</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">404 — chua co bang chung tung chay</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET iboard-api.ssi.com.vn/statistics/charts/history/foreign-trading-history
+{"symbol": "VNM", "resolution": "1D", "from": 1785715200, "to": 1786060800}</pre>
+    <div class="nhan-nho">TRƯỜNG (0)</div><div class="fs"><span class="f trong">không có</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">(không có mẫu)</pre>
+  </div>
+</details>
+<details class="cua chua">
+  <summary>
+    <span class="ten">/api/v2/Market/DailyStockPrice</span>
+    <span class="badge chua">chưa dùng</span>
+    <span class="sot">31 trường</span>
+    <span class="host">fc-data.ssi.com.vn</span>
+    <span class="meta">kho: <b>10,539</b> dòng · VND · RAW · sâu từ 2020-02-26 · <b>BO_TRO</b></span>
+  </summary>
+  <div class="than">
+    <p class="gc">gia THO THAT o MOI san · 31 truong · chi sau 2020-02-26 · can Bearer</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET fc-data.ssi.com.vn/api/v2/Market/DailyStockPrice
+{"symbol": "VNM"}</pre>
+    <div class="nhan-nho">TRƯỜNG (31)</div><div class="fs"><span class=f>TradingDate</span><span class=f>PriceChange</span><span class=f>PerPriceChange</span><span class=f>CeilingPrice</span><span class=f>FloorPrice</span><span class=f>RefPrice</span><span class=f>OpenPrice</span><span class=f>HighestPrice</span><span class=f>LowestPrice</span><span class=f>ClosePrice</span><span class=f>AveragePrice</span><span class=f>ClosePriceAdjusted</span><span class=f>TotalMatchVol</span><span class=f>TotalMatchVal</span><span class=f>TotalDealVal</span><span class=f>TotalDealVol</span><span class=f>ForeignBuyVolTotal</span><span class=f>ForeignCurrentRoom</span><span class=f>ForeignSellVolTotal</span><span class=f>ForeignBuyValTotal</span><span class=f>ForeignSellValTotal</span><span class=f>TotalBuyTrade</span><span class=f>TotalBuyTradeVol</span><span class=f>TotalSellTrade</span><span class=f>TotalSellTradeVol</span><span class=f>NetBuySellVol</span><span class=f>NetBuySellVal</span><span class=f>TotalTradedVol</span><span class=f>TotalTradedValue</span><span class=f>Symbol</span><span class=f>Time</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "TradingDate": "07/08/2026",
+ "PriceChange": "3000",
+ "PerPriceChange": "5.10",
+ "CeilingPrice": "63100",
+ "FloorPrice": "54900",
+ "RefPrice": "59000",
+ "OpenPrice": "59000",
+ "HighestPrice": "63100",
+ "LowestPrice": "59000",
+ "ClosePrice": "62000",
+ "AveragePrice": "63100",
+ "ClosePriceAdjusted": "62000",
+ "TotalMatchVol": "13239500",
+ "TotalMatchVal": "821613530000",
+ "TotalDealVal": "0",
+ "TotalDealVol": "0",
+ "ForeignBuyVolTotal": "3411501",
+ "ForeignCurrentRoom": "1054008536",
+ "ForeignSellVolTotal": "829187",
+ "ForeignBuyValTotal": "211766632500",
+ "ForeignSellValTotal": "51064962700",
+ "TotalBuyTrade": "0",
+ "TotalBuyTradeVol": "0",
+ "TotalSellTrade": "0",
+ "TotalSellTradeVol": "0",
+ "NetBuySellVol": "2582314",
+ "NetBuySellVal": "160701669800",
+ "TotalTradedVol": "13239500",
+ "TotalTradedValue": "821613530000",
+ "Symbol": "VNM",
+ "Time": null
+}</pre>
+  </div>
+</details>
+<details class="cua chua">
+  <summary>
+    <span class="ten">/api/v2/Market/IntradayOhlc</span>
+    <span class="badge chua">chưa dùng</span>
+    <span class="sot">7 trường</span>
+    <span class="host">fc-data.ssi.com.vn</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">OHLC trong phien 1 phut · can Bearer</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET fc-data.ssi.com.vn/api/v2/Market/IntradayOhlc
+{"symbol": "VNM"}</pre>
+    <div class="nhan-nho">TRƯỜNG (7)</div><div class="fs"><span class=f>symbol</span><span class=f>time</span><span class=f>open</span><span class=f>high</span><span class=f>low</span><span class=f>close</span><span class=f>volume</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "symbol": "VNM",
+ "time": "2026-08-11 09:15:58",
+ "open": 62500,
+ "high": 62900,
+ "low": 62500,
+ "close": 62700,
+ "volume": 95700
+}</pre>
+  </div>
+</details>
+<details class="cua dung">
+  <summary>
+    <span class="ten">/api/v2/Market/IndexComponents</span>
+    <span class="badge dung">đang dùng</span>
+    <span class="sot">5 trường</span>
+    <span class="host">fc-data.ssi.com.vn</span>
+    <span class="meta">kho: <b>0</b> dòng</span>
+  </summary>
+  <div class="than">
+    <p class="gc">thanh phan ro · CHI tra ro HIEN TAI, tham so ngay bi bo qua</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET fc-data.ssi.com.vn/api/v2/Market/IndexComponents
+{"indexCode": "VN30", "pageIndex": 1, "pageSize": 100}</pre>
+    <div class="nhan-nho">TRƯỜNG (5)</div><div class="fs"><span class=f>IndexCode</span><span class=f>IndexName</span><span class=f>Exchange</span><span class=f>TotalSymbolNo</span><span class=f>IndexComponent</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "IndexCode": "VN30",
+ "IndexName": "VN30",
+ "Exchange": "HOSE",
+ "TotalSymbolNo": "30",
+ "IndexComponent": [
+  {
+   "Isin": "ACB",
+   "StockSymbol": "ACB"
+  },
+  {
+   "Isin": "BID",
+   "StockSymbol": "BID"
+  },
+  {
+   "Isin": "BSR",
+   "StockSymbol": "BSR"
+  },
+  {
+   "Isin": "CTG",
+   "StockSymbol": "CTG"
+  },
+  {
+   "Isin": "FPT",
+   "StockSymbol": "FPT"
+  },
+  {
+   "Isin": "GAS",
+   "StockSymbol": "GAS"
+  },
+  {
+   "Isin": "GVR",
+   "StockSymbol": "GVR"
+  },
+  {
+   "Isin": "HDB",
+   "StockSymbol": "HDB"
+  },
+  {
+   "Isin": "HPG",
+   "StockSymbol": "HPG"
+  },
+  {
+   "Isin": "LPB",
+   "StockSymbol": "LPB"
+  },
+  {
+   "Isin": "MBB",
+   "StockSymbol": "MBB"
+  },
+  {
+   "Isin": "MCH",
+   "StockSymbol": "MCH"
+  },
+  {
+   "Isin": "MSN",
+   "StockSymbol": "MSN"
+  },
+  {
+   "Isin": "MWG",
+   "StockSymbol": "MWG"
+  },
+  {
+   "Isin": "SAB",
+   "StockSymbol": "SAB"
+  },
+  {
+   "Isin": "SHB",
+   "StockSymbol": "SHB"
+  },
+  {
+   "Isin": "SSB",
+   "StockSymbol": "SSB"
+  },
+  {
+   "Isin": "SSI",
+   "StockSymbol": "SSI"
+  },
+  {
+   "Isin": "STB",
+   "StockSymbol": "STB"
+  },
+  {
+   "Isin": "TCB",
+   "StockSymbol": "TCB"
+  },
+  {
+   "Isin": "TCX",
+   "StockSymbol": "TCX"
+  },
+  {
+   "Isin": "VCB",
+   "StockSymbol": "VCB"
+  },
+  {
+   "Isin": "VHM",
+   "StockSymbol": "VHM"
+  },
+  {
+   "Isin": "VIB",
+   "StockSymbol": "VIB"
+  },
+  {
+   "Isin": "VIC",
+   "StockSymbol": "VIC"
+  },
+  {
+   "Isin": "VJC",
+   "StockSymbol": "VJC"
+  },
+  {
+   "Isin": "VNM",
+   "StockSymbol": "VNM"
+  },
+  {
+   "Isin": "VPB",
+   "StockSymbol": "VPB"
+  },
+  {
+   "Isin": "VPL",
+   "StockSymbol": "VPL"
+  },
+  {
+   "Isin": "VRE",
+   "StockSymbol": "VRE"
+  }
+ ]
+}</pre>
+  </div>
+</details>
+<details class="cua chua">
+  <summary>
+    <span class="ten">/api/v2/Market/DailyIndex</span>
+    <span class="badge chua">chưa dùng</span>
+    <span class="sot">21 trường</span>
+    <span class="host">fc-data.ssi.com.vn</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">chi so + do rong thi truong</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET fc-data.ssi.com.vn/api/v2/Market/DailyIndex
+{"indexId": "VNINDEX", "fromDate": "03/08/2026", "toDate": "07/08/2026", "pageIndex": 1, "pageSize": 10}</pre>
+    <div class="nhan-nho">TRƯỜNG (21)</div><div class="fs"><span class=f>IndexId</span><span class=f>IndexValue</span><span class=f>TradingDate</span><span class=f>Time</span><span class=f>Change</span><span class=f>RatioChange</span><span class=f>TotalTrade</span><span class=f>TotalMatchVol</span><span class=f>TotalMatchVal</span><span class=f>TypeIndex</span><span class=f>IndexName</span><span class=f>Advances</span><span class=f>NoChanges</span><span class=f>Declines</span><span class=f>Ceilings</span><span class=f>Floors</span><span class=f>TotalDealVol</span><span class=f>TotalDealVal</span><span class=f>TotalVol</span><span class=f>TotalVal</span><span class=f>TradingSession</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "IndexId": "VNINDEX",
+ "IndexValue": "1768.06",
+ "TradingDate": "07/08/2026",
+ "Time": null,
+ "Change": "0.0327999999999997",
+ "RatioChange": "0.19",
+ "TotalTrade": "0",
+ "TotalMatchVol": "529722667",
+ "TotalMatchVal": "14516909584260",
+ "TypeIndex": null,
+ "IndexName": "VNINDEX",
+ "Advances": "155",
+ "NoChanges": "62",
+ "Declines": "137",
+ "Ceilings": "9",
+ "Floors": "2",
+ "TotalDealVol": "117974879",
+ "TotalDealVal": "2843157455140",
+ "TotalVol": "647697546",
+ "TotalVal": "17360067039400",
+ "TradingSession": "C"
+}</pre>
+  </div>
+</details>
+</section>
+<section>
+  <h2>DNSE <span class="dem">3 cửa · 3 sống</span></h2>
+  <p class="mota">services.entrade.com.vn · api-bo.dnse.com.vn — đều công khai</p>
+  
+<details class="cua dung">
+  <summary>
+    <span class="ten">/chart-api/v2/ohlcs/stock</span>
+    <span class="badge dung">đang dùng</span>
+    <span class="sot">7 trường</span>
+    <span class="host">services.entrade.com.vn</span>
+    <span class="meta">kho: <b>591,941</b> dòng · kVND · ADJUSTED · sâu từ 2012-03-20 · <b>DOI_CHUNG</b></span>
+  </summary>
+  <div class="than">
+    <p class="gc">gia DIEU CHINH · kVND · tu 2012-03 · moc t o 02:00 UTC (khac SSI)</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET services.entrade.com.vn/chart-api/v2/ohlcs/stock
+{"from": 1785715200, "to": 1786147200, "symbol": "VNM", "resolution": "1D"}</pre>
+    <div class="nhan-nho">TRƯỜNG (7)</div><div class="fs"><span class=f>t</span><span class=f>o</span><span class=f>h</span><span class=f>l</span><span class=f>c</span><span class=f>v</span><span class=f>nextTime</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "t": [
+  1785722400,
+  1785808800,
+  1785895200
+ ],
+ "o": [
+  60.9,
+  60.4,
+  59.4
+ ],
+ "h": [
+  61,
+  60.4,
+  60.1
+ ],
+ "l": [
+  60,
+  59,
+  58.6
+ ],
+ "c": [
+  60.3,
+  59.5,
+  58.6
+ ],
+ "v": [
+  6377600,
+  5531900,
+  5288700
+ ],
+ "nextTime": 0
+}</pre>
+  </div>
+</details>
+<details class="cua chua">
+  <summary>
+    <span class="ten">/chart-api/v2/ohlcs/derivative</span>
+    <span class="badge chua">chưa dùng</span>
+    <span class="sot">7 trường</span>
+    <span class="host">services.entrade.com.vn</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">phai sinh</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET services.entrade.com.vn/chart-api/v2/ohlcs/derivative
+{"from": 1785715200, "to": 1786147200, "symbol": "VN30F1M", "resolution": "1D"}</pre>
+    <div class="nhan-nho">TRƯỜNG (7)</div><div class="fs"><span class=f>t</span><span class=f>o</span><span class=f>h</span><span class=f>l</span><span class=f>c</span><span class=f>v</span><span class=f>nextTime</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "t": [
+  1785722400,
+  1785808800,
+  1785895200
+ ],
+ "o": [
+  1883,
+  1918,
+  1934
+ ],
+ "h": [
+  1925,
+  1926,
+  1942
+ ],
+ "l": [
+  1881.9,
+  1911,
+  1907.4
+ ],
+ "c": [
+  1914,
+  1925,
+  1913.8
+ ],
+ "v": [
+  205554,
+  190633,
+  218000
+ ],
+ "nextTime": 0
+}</pre>
+  </div>
+</details>
+<details class="cua dung">
+  <summary>
+    <span class="ten">/senses-api/events</span>
+    <span class="badge dung">đang dùng</span>
+    <span class="sot">16 trường</span>
+    <span class="host">api-bo.dnse.com.vn</span>
+    <span class="meta">kho: <b>7,247</b> dòng · sâu từ 2007-03-06</span>
+  </summary>
+  <div class="than">
+    <p class="gc">su kien · tran 20/trang · KHONG co ti le dang SO, chi co trong cau chu</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET api-bo.dnse.com.vn/senses-api/events
+{"symbol": "VHM", "page": 0}</pre>
+    <div class="nhan-nho">TRƯỜNG (16)</div><div class="fs"><span class=f>id</span><span class=f>symbol</span><span class=f>eventId</span><span class=f>gdkhqDateOrigin</span><span class=f>ndkccDateOrigin</span><span class=f>timeOrigin</span><span class=f>note</span><span class=f>name</span><span class=f>title</span><span class=f>titleEvent</span><span class=f>content</span><span class=f>fileUrl</span><span class=f>lastUpdate</span><span class=f>eventTypeId</span><span class=f>gdkhqDate</span><span class=f>ndkccDate</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "id": 5115537,
+ "symbol": "VHM",
+ "eventId": 35256221,
+ "gdkhqDateOrigin": "2026-08-06T00:00:00Z",
+ "ndkccDateOrigin": "2026-08-07T00:00:00Z",
+ "timeOrigin": "0001-01-01T00:00:00Z",
+ "note": "Trả cổ tức năm 2025 bằng cổ phiếu tỷ lệ 1:1",
+ "name": "Trả cổ tức bằng cổ phiếu",
+ "title": "Trả cổ tức năm 2025 bằng cổ phiếu tỷ lệ 1:1",
+ "titleEvent": "Trả cổ tức năm 2025 bằng cổ phiếu tỷ lệ 1:1",
+ "content": "Trả cổ tức năm 2025 bằng cổ phiếu tỷ lệ 1:1",
+ "fileUrl": "",
+ "lastUpdate": "2026-07-24T16:49:39Z",
+ "eventTypeId": 1,
+ "gdkhqDate": "2026-08-06T00:00:00Z",
+ "ndkccDate": "2026-08-07T00:00:00Z"
+}</pre>
+  </div>
+</details>
+</section>
+<section>
+  <h2>VCI <span class="dem">4 cửa · 3 sống</span></h2>
+  <p class="mota">trading.vietcap.com.vn · iq.vietcap.com.vn — đều công khai</p>
+  
+<details class="cua chua">
+  <summary>
+    <span class="ten">/api/chart/OHLCChart/gap</span>
+    <span class="badge chua">chưa dùng</span>
+    <span class="sot">10 trường</span>
+    <span class="host">trading.vietcap.com.vn</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">gia DIEU CHINH · VND (khac SSI/DNSE dung kVND) · sau toi 2006-01-19 · CHUA NAP</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">POST trading.vietcap.com.vn/api/chart/OHLCChart/gap
+{"timeFrame": "ONE_DAY", "symbols": ["VNM"], "from": 1785715200, "to": 1786060800}</pre>
+    <div class="nhan-nho">TRƯỜNG (10)</div><div class="fs"><span class=f>o</span><span class=f>h</span><span class=f>l</span><span class=f>c</span><span class=f>v</span><span class=f>t</span><span class=f>accumulatedVolume</span><span class=f>accumulatedValue</span><span class=f>symbol</span><span class=f>minBatchTruncTime</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "symbol": "VNM",
+ "o": [
+  60900,
+  60400,
+  59400
+ ],
+ "h": [
+  61000,
+  60400,
+  60100
+ ],
+ "l": [
+  60000,
+  59000,
+  58600
+ ],
+ "c": [
+  60300,
+  59500,
+  58600
+ ],
+ "v": [
+  6377600,
+  5531900,
+  5288700
+ ],
+ "t": [
+  "1785715200",
+  "1785801600",
+  "1785888000"
+ ],
+ "accumulatedVolume": [
+  6377600,
+  5531900,
+  5288700
+ ],
+ "accumulatedValue": [
+  384777.74,
+  328979.59,
+  311814.22
+ ],
+ "minBatchTruncTime": "1785715200"
+}</pre>
+  </div>
+</details>
+<details class="cua hong">
+  <summary>
+    <span class="ten">/api/chart/OHLCChart/gap-chart</span>
+    <span class="badge hong">trả vỏ lỗi</span>
+    <span class="sot">4 trường</span>
+    <span class="host">trading.vietcap.com.vn</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">tra rong</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">POST trading.vietcap.com.vn/api/chart/OHLCChart/gap-chart
+{"timeFrame": "ONE_DAY", "symbols": ["VNM"], "from": 1785715200, "to": 1786060800}</pre>
+    <div class="nhan-nho">TRƯỜNG (4)</div><div class="fs"><span class=f>message</span><span class=f>payload</span><span class=f>error</span><span class=f>code</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "message": "Invalid params",
+ "payload": {
+  "timeFrame": "ONE_DAY",
+  "symbols": [
+   "VNM"
+  ],
+  "from": 1785715200,
+  "to": 1786060800
+ },
+ "error": true,
+ "code": 400
+}</pre>
+  </div>
+</details>
+<details class="cua dung">
+  <summary>
+    <span class="ten">/api/iq-insight-service/v1/events</span>
+    <span class="badge dung">đang dùng</span>
+    <span class="sot">17 trường</span>
+    <span class="host">iq.vietcap.com.vn</span>
+    <span class="meta">kho: <b>6,808</b> dòng · sâu từ 2010-01-01</span>
+  </summary>
+  <div class="than">
+    <p class="gc">su kien · CO exerciseRatio dang SO · thieu ex_date 115/2931</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET iq.vietcap.com.vn/api/iq-insight-service/v1/events
+{"ticker": "VHM", "fromDate": "20260101", "toDate": "20260812", "eventCode": "DIV,ISS", "page": 0, "size": 1}</pre>
+    <div class="nhan-nho">TRƯỜNG (17)</div><div class="fs"><span class=f>id</span><span class=f>organCode</span><span class=f>eventNameVi</span><span class=f>eventNameEn</span><span class=f>organNameEn</span><span class=f>organNameVi</span><span class=f>ticker</span><span class=f>eventCode</span><span class=f>eventTitleVi</span><span class=f>eventTitleEn</span><span class=f>displayDate1</span><span class=f>displayDate2</span><span class=f>publicDate</span><span class=f>recordDate</span><span class=f>exrightDate</span><span class=f>exerciseRatio</span><span class=f>category</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "id": "69eab80f9a7ad236002b1863",
+ "organCode": "NHN",
+ "eventNameVi": "Phát hành cổ phiếu",
+ "eventNameEn": "Share Issue",
+ "organNameEn": "Vinhomes Joint Stock Company",
+ "organNameVi": "Công ty Cổ phần Vinhomes",
+ "ticker": "VHM",
+ "eventCode": "ISS",
+ "eventTitleVi": "Phát hành cổ phiếu - Trả Cổ tức bằng Cổ phiếu tỉ lệ 100.0%",
+ "eventTitleEn": "Share Issue - Stock dividend ratio 100.0%",
+ "displayDate1": "2026-08-06T00:00:00",
+ "displayDate2": "2026-07-24T00:00:00",
+ "publicDate": "2026-07-24T00:00:00",
+ "recordDate": "2026-08-07T00:00:00",
+ "exrightDate": "2026-08-06T00:00:00",
+ "exerciseRatio": 1.0,
+ "category": "DIVIDEND"
+}</pre>
+  </div>
+</details>
+<details class="cua dung">
+  <summary>
+    <span class="ten">/api/iq-insight-service/v1/company</span>
+    <span class="badge dung">đang dùng</span>
+    <span class="sot">15 trường</span>
+    <span class="host">iq.vietcap.com.vn</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">danh muc cong ty · tham so ticker BI BO QUA, luon tra TOAN BO</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">GET iq.vietcap.com.vn/api/iq-insight-service/v1/company
+{"ticker": "VHM"}</pre>
+    <div class="nhan-nho">TRƯỜNG (15)</div><div class="fs"><span class=f>organCode</span><span class=f>ticker</span><span class=f>exchange</span><span class=f>organNameEn</span><span class=f>organNameVi</span><span class=f>organShortNameEn</span><span class=f>organShortNameVi</span><span class=f>logoUrl</span><span class=f>website</span><span class=f>marketCap</span><span class=f>marketCapUsd</span><span class=f>sectorNameLv1CustomEn</span><span class=f>sectorNameLv1CustomVi</span><span class=f>sectorNameLv2En</span><span class=f>sectorNameLv2Vi</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "organCode": "ASECO32",
+ "ticker": "A32",
+ "exchange": "UPCOM",
+ "organNameEn": "32 Joint Stock Company",
+ "organNameVi": "Công ty Cổ phần 32",
+ "organShortNameEn": "32 Company",
+ "organShortNameVi": "Công ty 32",
+ "logoUrl": "https://vietcap-website.s3.ap-southeast-1.amazonaws.com/cms/logo/A32.webp",
+ "website": "",
+ "marketCap": 201960000000.0,
+ "marketCapUsd": 7754271.4532539835,
+ "sectorNameLv1CustomEn": "Consumer Goods",
+ "sectorNameLv1CustomVi": "Hàng Tiêu dùng",
+ "sectorNameLv2En": "Personal &amp; Household Goods",
+ "sectorNameLv2Vi": "Hàng cá nhân &amp; Gia dụng"
+}</pre>
+  </div>
+</details>
+</section>
+<section>
+  <h2>vnstock <span class="dem">4 cửa · 4 sống</span></h2>
+  <p class="mota">thư viện Python, không phải API. CẤM dùng cho GIÁ — ngoại lệ 03/08 chỉ cho BCTC</p>
+  
+<details class="cua chua">
+  <summary>
+    <span class="ten">vnstock.Vnstock().stock().finance.*</span>
+    <span class="badge chua">chưa khai trong vendor_door</span>
+    <span class="sot">11 trường</span>
+    <span class="host">thu vien Python</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">BCTC — bang can doi ke toan · NGOAI LE 03/08: chi BCTC duoc dung vnstock, CAM dung cho GIA</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">lib thu vien Pythonvnstock.Vnstock().stock().finance.*
+{"symbol": "VNM", "source": "VCI", "period": "year"}</pre>
+    <div class="nhan-nho">TRƯỜNG (11)</div><div class="fs"><span class=f>item</span><span class=f>item_en</span><span class=f>item_id</span><span class=f>2025</span><span class=f>2024</span><span class=f>2023</span><span class=f>2022</span><span class=f>2021</span><span class=f>2020</span><span class=f>2019</span><span class=f>2018</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "item": "TÀI SẢN NGẮN HẠN",
+ "item_en": "CURRENT ASSETS",
+ "item_id": "current_assets",
+ "2025": 36261180908033.0,
+ "2024": 37553650065098.0,
+ "2023": 35935879621477.0,
+ "2022": 31560382174201.0,
+ "2021": 36109910649785.0,
+ "2020": 29665725805058.0,
+ "2019": 24721565376552.0,
+ "2018": 20559756794837.0
+}</pre>
+  </div>
+</details>
+<details class="cua chua">
+  <summary>
+    <span class="ten">vnstock.Vnstock().stock().finance.*</span>
+    <span class="badge chua">chưa khai trong vendor_door</span>
+    <span class="sot">11 trường</span>
+    <span class="host">thu vien Python</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">BCTC — ket qua kinh doanh · NGOAI LE 03/08: chi BCTC duoc dung vnstock, CAM dung cho GIA</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">lib thu vien Pythonvnstock.Vnstock().stock().finance.*
+{"symbol": "VNM", "source": "VCI", "period": "year"}</pre>
+    <div class="nhan-nho">TRƯỜNG (11)</div><div class="fs"><span class=f>item</span><span class=f>item_en</span><span class=f>item_id</span><span class=f>2025</span><span class=f>2024</span><span class=f>2023</span><span class=f>2022</span><span class=f>2021</span><span class=f>2020</span><span class=f>2019</span><span class=f>2018</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "item": "Doanh thu bán hàng và cung cấp dịch vụ",
+ "item_en": "Sales",
+ "item_id": "sales",
+ "2025": 63723520008574.0,
+ "2024": 61823889921880.0,
+ "2023": 60478912566740.0,
+ "2022": 60074730223299.0,
+ "2021": 61012074147764.0,
+ "2020": 59722908393236.0,
+ "2019": 56400229726717.0,
+ "2018": 52629230427284.0
+}</pre>
+  </div>
+</details>
+<details class="cua chua">
+  <summary>
+    <span class="ten">vnstock.Vnstock().stock().finance.*</span>
+    <span class="badge chua">chưa khai trong vendor_door</span>
+    <span class="sot">11 trường</span>
+    <span class="host">thu vien Python</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">BCTC — luu chuyen tien te · NGOAI LE 03/08: chi BCTC duoc dung vnstock, CAM dung cho GIA</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">lib thu vien Pythonvnstock.Vnstock().stock().finance.*
+{"symbol": "VNM", "source": "VCI", "period": "year"}</pre>
+    <div class="nhan-nho">TRƯỜNG (11)</div><div class="fs"><span class=f>item</span><span class=f>item_en</span><span class=f>item_id</span><span class=f>2025</span><span class=f>2024</span><span class=f>2023</span><span class=f>2022</span><span class=f>2021</span><span class=f>2020</span><span class=f>2019</span><span class=f>2018</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "item": "Lợi nhuận/(lỗ) trước thuế",
+ "item_en": "Net profit/(loss) before tax",
+ "item_id": "net_profit_loss_before_tax",
+ "2025": 11649985224938.0,
+ "2024": 11599653741335.0,
+ "2023": 10967899391486.0,
+ "2022": 10495534676745.0,
+ "2021": 12922235486919.0,
+ "2020": 13518536087024.0,
+ "2019": 12795709638557.0,
+ "2018": 12051696266123.0
+}</pre>
+  </div>
+</details>
+<details class="cua chua">
+  <summary>
+    <span class="ten">vnstock.Vnstock().stock().finance.*</span>
+    <span class="badge chua">chưa khai trong vendor_door</span>
+    <span class="sot">19 trường</span>
+    <span class="host">thu vien Python</span>
+    
+  </summary>
+  <div class="than">
+    <p class="gc">BCTC — chi so tai chinh · NGOAI LE 03/08: chi BCTC duoc dung vnstock, CAM dung cho GIA</p>
+    <div class="nhan-nho">GỌI</div><pre class="goi">lib thu vien Pythonvnstock.Vnstock().stock().finance.*
+{"symbol": "VNM", "source": "VCI", "period": "year"}</pre>
+    <div class="nhan-nho">TRƯỜNG (19)</div><div class="fs"><span class=f>item</span><span class=f>item_en</span><span class=f>item_id</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span><span class=f>2018</span></div>
+    <div class="nhan-nho">MẪU TRẢ VỀ — đo 2026-08-13</div><pre class="mau">{
+ "item": "Năm",
+ "item_en": 0,
+ "item_id": "year",
+ "2018": "2018"
+}</pre>
+  </div>
+</details>
+</section>
+<footer>
+Trường và mẫu lấy từ lời gọi THẬT, không chép từ tài liệu. Trạng thái lấy từ
+<code>meta.vendor_door</code> và <code>meta.source_contract</code> của quant_v2.<br>
+Sinh bởi <code>build_nguon.py</code> · dữ liệu thô ở <code>mau-tai/cac-cua.json</code>
+</footer>
+</div></body></html>

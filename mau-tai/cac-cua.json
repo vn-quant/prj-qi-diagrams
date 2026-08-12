@@ -1,0 +1,1031 @@
+{
+ "ssi-charts-history": {
+  "vendor": "SSI",
+  "host": "iboard-api.ssi.com.vn",
+  "path": "/statistics/charts/history",
+  "method": "GET",
+  "params": {
+   "symbol": "VNM",
+   "resolution": "1D",
+   "from": 1785715200,
+   "to": 1786060800
+  },
+  "ok": true,
+  "so_truong": 8,
+  "truong": [
+   "t",
+   "c",
+   "o",
+   "h",
+   "l",
+   "v",
+   "s",
+   "nextTime"
+  ],
+  "mau": {
+   "t": [
+    1785715200,
+    1785801600,
+    1785888000
+   ],
+   "c": [
+    60.3,
+    59.5,
+    58.6
+   ],
+   "o": [
+    60.9,
+    60.4,
+    59.4
+   ],
+   "h": [
+    61,
+    60.4,
+    60.1
+   ],
+   "l": [
+    60,
+    59,
+    58.6
+   ],
+   "v": [
+    6377600,
+    5531900,
+    5288700
+   ],
+   "s": "ok",
+   "nextTime": null
+  },
+  "ghi_chu": "gia DIEU CHINH · kVND · sau toi 2000-07-28 · NGUON CHINH",
+  "do_luc": "2026-08-13"
+ },
+ "ssi-company-stock-price": {
+  "vendor": "SSI",
+  "host": "iboard-api.ssi.com.vn",
+  "path": "/statistics/company/stock-price",
+  "method": "GET",
+  "params": {
+   "symbol": "VNM",
+   "pageIndex": 1,
+   "pageSize": 1,
+   "fromDate": "11/08/2026",
+   "toDate": "11/08/2026"
+  },
+  "ok": true,
+  "so_truong": 31,
+  "truong": [
+   "tradingDate",
+   "priceChange",
+   "perPriceChange",
+   "ceilingPrice",
+   "floorPrice",
+   "refPrice",
+   "openPrice",
+   "highestPrice",
+   "lowestPrice",
+   "closePrice",
+   "averagePrice",
+   "closePriceAdjusted",
+   "totalMatchVol",
+   "totalMatchVal",
+   "totalDealVal",
+   "totalDealVol",
+   "foreignBuyVolTotal",
+   "foreignCurrentRoom",
+   "foreignSellVolTotal",
+   "foreignBuyValTotal",
+   "foreignSellValTotal",
+   "totalBuyTrade",
+   "totalBuyTradeVol",
+   "totalSellTrade",
+   "totalSellTradeVol",
+   "netBuySellVol",
+   "netBuySellVal",
+   "exchange",
+   "symbol",
+   "foreignBuyVolMatched",
+   "foreignBuyVolDeal"
+  ],
+  "mau": {
+   "tradingDate": "11/08/2026 00:00:00",
+   "priceChange": "-100.0",
+   "perPriceChange": "-0.0016103100",
+   "ceilingPrice": "66400.0",
+   "floorPrice": "57800.0",
+   "refPrice": "62100.0000000000",
+   "openPrice": "62500.0000000000",
+   "highestPrice": "63300.0000000000",
+   "lowestPrice": "61800.0000000000",
+   "closePrice": "62000.0",
+   "averagePrice": "0.0",
+   "closePriceAdjusted": "62000.0000000000",
+   "totalMatchVol": "4486430.0",
+   "totalMatchVal": "280409245500.0",
+   "totalDealVal": "0.0",
+   "totalDealVol": "0.0",
+   "foreignBuyVolTotal": "1284020.0",
+   "foreignCurrentRoom": "1054584139",
+   "foreignSellVolTotal": "317546.0",
+   "foreignBuyValTotal": "80363054000.0",
+   "foreignSellValTotal": "19850388500.0",
+   "totalBuyTrade": "5335",
+   "totalBuyTradeVol": "7371302.0",
+   "totalSellTrade": "6667",
+   "totalSellTradeVol": "9646040.0",
+   "netBuySellVol": "966474",
+   "netBuySellVal": "60512665500",
+   "exchange": "0",
+   "symbol": "VNM",
+   "foreignBuyVolMatched": "1284020.0",
+   "foreignBuyVolDeal": "0.0"
+  },
+  "ghi_chu": "gia THO + TRAN/SAN + khoi ngoai · VND · TRON THANG: O/H/L da dieu chinh",
+  "do_luc": "2026-08-13"
+ },
+ "ssi-foreign-trading": {
+  "vendor": "SSI",
+  "host": "iboard-api.ssi.com.vn",
+  "path": "/statistics/charts/history/foreign-trading-history",
+  "method": "GET",
+  "params": {
+   "symbol": "VNM",
+   "resolution": "1D",
+   "from": 1785715200,
+   "to": 1786060800
+  },
+  "ok": false,
+  "so_truong": 0,
+  "truong": [],
+  "mau": null,
+  "ghi_chu": "404 — chua co bang chung tung chay",
+  "do_luc": "2026-08-13"
+ },
+ "ssi-fc-daily-stock-price": {
+  "vendor": "SSI",
+  "host": "fc-data.ssi.com.vn",
+  "path": "/api/v2/Market/DailyStockPrice",
+  "method": "GET",
+  "params": {
+   "symbol": "VNM"
+  },
+  "ok": true,
+  "so_truong": 31,
+  "truong": [
+   "TradingDate",
+   "PriceChange",
+   "PerPriceChange",
+   "CeilingPrice",
+   "FloorPrice",
+   "RefPrice",
+   "OpenPrice",
+   "HighestPrice",
+   "LowestPrice",
+   "ClosePrice",
+   "AveragePrice",
+   "ClosePriceAdjusted",
+   "TotalMatchVol",
+   "TotalMatchVal",
+   "TotalDealVal",
+   "TotalDealVol",
+   "ForeignBuyVolTotal",
+   "ForeignCurrentRoom",
+   "ForeignSellVolTotal",
+   "ForeignBuyValTotal",
+   "ForeignSellValTotal",
+   "TotalBuyTrade",
+   "TotalBuyTradeVol",
+   "TotalSellTrade",
+   "TotalSellTradeVol",
+   "NetBuySellVol",
+   "NetBuySellVal",
+   "TotalTradedVol",
+   "TotalTradedValue",
+   "Symbol",
+   "Time"
+  ],
+  "mau": {
+   "TradingDate": "07/08/2026",
+   "PriceChange": "3000",
+   "PerPriceChange": "5.10",
+   "CeilingPrice": "63100",
+   "FloorPrice": "54900",
+   "RefPrice": "59000",
+   "OpenPrice": "59000",
+   "HighestPrice": "63100",
+   "LowestPrice": "59000",
+   "ClosePrice": "62000",
+   "AveragePrice": "63100",
+   "ClosePriceAdjusted": "62000",
+   "TotalMatchVol": "13239500",
+   "TotalMatchVal": "821613530000",
+   "TotalDealVal": "0",
+   "TotalDealVol": "0",
+   "ForeignBuyVolTotal": "3411501",
+   "ForeignCurrentRoom": "1054008536",
+   "ForeignSellVolTotal": "829187",
+   "ForeignBuyValTotal": "211766632500",
+   "ForeignSellValTotal": "51064962700",
+   "TotalBuyTrade": "0",
+   "TotalBuyTradeVol": "0",
+   "TotalSellTrade": "0",
+   "TotalSellTradeVol": "0",
+   "NetBuySellVol": "2582314",
+   "NetBuySellVal": "160701669800",
+   "TotalTradedVol": "13239500",
+   "TotalTradedValue": "821613530000",
+   "Symbol": "VNM",
+   "Time": null
+  },
+  "ghi_chu": "gia THO THAT o MOI san · 31 truong · chi sau 2020-02-26 · can Bearer",
+  "do_luc": "2026-08-13"
+ },
+ "ssi-fc-intraday": {
+  "vendor": "SSI",
+  "host": "fc-data.ssi.com.vn",
+  "path": "/api/v2/Market/IntradayOhlc",
+  "method": "GET",
+  "params": {
+   "symbol": "VNM"
+  },
+  "ok": true,
+  "so_truong": 7,
+  "truong": [
+   "symbol",
+   "time",
+   "open",
+   "high",
+   "low",
+   "close",
+   "volume"
+  ],
+  "mau": {
+   "symbol": "VNM",
+   "time": "2026-08-11 09:15:58",
+   "open": 62500,
+   "high": 62900,
+   "low": 62500,
+   "close": 62700,
+   "volume": 95700
+  },
+  "ghi_chu": "OHLC trong phien 1 phut · can Bearer",
+  "do_luc": "2026-08-13"
+ },
+ "ssi-fc-index-components": {
+  "vendor": "SSI",
+  "host": "fc-data.ssi.com.vn",
+  "path": "/api/v2/Market/IndexComponents",
+  "method": "GET",
+  "params": {
+   "indexCode": "VN30",
+   "pageIndex": 1,
+   "pageSize": 100
+  },
+  "ok": true,
+  "so_truong": 5,
+  "truong": [
+   "IndexCode",
+   "IndexName",
+   "Exchange",
+   "TotalSymbolNo",
+   "IndexComponent"
+  ],
+  "mau": {
+   "IndexCode": "VN30",
+   "IndexName": "VN30",
+   "Exchange": "HOSE",
+   "TotalSymbolNo": "30",
+   "IndexComponent": [
+    {
+     "Isin": "ACB",
+     "StockSymbol": "ACB"
+    },
+    {
+     "Isin": "BID",
+     "StockSymbol": "BID"
+    },
+    {
+     "Isin": "BSR",
+     "StockSymbol": "BSR"
+    },
+    {
+     "Isin": "CTG",
+     "StockSymbol": "CTG"
+    },
+    {
+     "Isin": "FPT",
+     "StockSymbol": "FPT"
+    },
+    {
+     "Isin": "GAS",
+     "StockSymbol": "GAS"
+    },
+    {
+     "Isin": "GVR",
+     "StockSymbol": "GVR"
+    },
+    {
+     "Isin": "HDB",
+     "StockSymbol": "HDB"
+    },
+    {
+     "Isin": "HPG",
+     "StockSymbol": "HPG"
+    },
+    {
+     "Isin": "LPB",
+     "StockSymbol": "LPB"
+    },
+    {
+     "Isin": "MBB",
+     "StockSymbol": "MBB"
+    },
+    {
+     "Isin": "MCH",
+     "StockSymbol": "MCH"
+    },
+    {
+     "Isin": "MSN",
+     "StockSymbol": "MSN"
+    },
+    {
+     "Isin": "MWG",
+     "StockSymbol": "MWG"
+    },
+    {
+     "Isin": "SAB",
+     "StockSymbol": "SAB"
+    },
+    {
+     "Isin": "SHB",
+     "StockSymbol": "SHB"
+    },
+    {
+     "Isin": "SSB",
+     "StockSymbol": "SSB"
+    },
+    {
+     "Isin": "SSI",
+     "StockSymbol": "SSI"
+    },
+    {
+     "Isin": "STB",
+     "StockSymbol": "STB"
+    },
+    {
+     "Isin": "TCB",
+     "StockSymbol": "TCB"
+    },
+    {
+     "Isin": "TCX",
+     "StockSymbol": "TCX"
+    },
+    {
+     "Isin": "VCB",
+     "StockSymbol": "VCB"
+    },
+    {
+     "Isin": "VHM",
+     "StockSymbol": "VHM"
+    },
+    {
+     "Isin": "VIB",
+     "StockSymbol": "VIB"
+    },
+    {
+     "Isin": "VIC",
+     "StockSymbol": "VIC"
+    },
+    {
+     "Isin": "VJC",
+     "StockSymbol": "VJC"
+    },
+    {
+     "Isin": "VNM",
+     "StockSymbol": "VNM"
+    },
+    {
+     "Isin": "VPB",
+     "StockSymbol": "VPB"
+    },
+    {
+     "Isin": "VPL",
+     "StockSymbol": "VPL"
+    },
+    {
+     "Isin": "VRE",
+     "StockSymbol": "VRE"
+    }
+   ]
+  },
+  "ghi_chu": "thanh phan ro · CHI tra ro HIEN TAI, tham so ngay bi bo qua",
+  "do_luc": "2026-08-13"
+ },
+ "ssi-fc-daily-index": {
+  "vendor": "SSI",
+  "host": "fc-data.ssi.com.vn",
+  "path": "/api/v2/Market/DailyIndex",
+  "method": "GET",
+  "params": {
+   "indexId": "VNINDEX",
+   "fromDate": "03/08/2026",
+   "toDate": "07/08/2026",
+   "pageIndex": 1,
+   "pageSize": 10
+  },
+  "ok": true,
+  "so_truong": 21,
+  "truong": [
+   "IndexId",
+   "IndexValue",
+   "TradingDate",
+   "Time",
+   "Change",
+   "RatioChange",
+   "TotalTrade",
+   "TotalMatchVol",
+   "TotalMatchVal",
+   "TypeIndex",
+   "IndexName",
+   "Advances",
+   "NoChanges",
+   "Declines",
+   "Ceilings",
+   "Floors",
+   "TotalDealVol",
+   "TotalDealVal",
+   "TotalVol",
+   "TotalVal",
+   "TradingSession"
+  ],
+  "mau": {
+   "IndexId": "VNINDEX",
+   "IndexValue": "1768.06",
+   "TradingDate": "07/08/2026",
+   "Time": null,
+   "Change": "0.0327999999999997",
+   "RatioChange": "0.19",
+   "TotalTrade": "0",
+   "TotalMatchVol": "529722667",
+   "TotalMatchVal": "14516909584260",
+   "TypeIndex": null,
+   "IndexName": "VNINDEX",
+   "Advances": "155",
+   "NoChanges": "62",
+   "Declines": "137",
+   "Ceilings": "9",
+   "Floors": "2",
+   "TotalDealVol": "117974879",
+   "TotalDealVal": "2843157455140",
+   "TotalVol": "647697546",
+   "TotalVal": "17360067039400",
+   "TradingSession": "C"
+  },
+  "ghi_chu": "chi so + do rong thi truong",
+  "do_luc": "2026-08-13"
+ },
+ "dnse-ohlcs-stock": {
+  "vendor": "DNSE",
+  "host": "services.entrade.com.vn",
+  "path": "/chart-api/v2/ohlcs/stock",
+  "method": "GET",
+  "params": {
+   "from": 1785715200,
+   "to": 1786147200,
+   "symbol": "VNM",
+   "resolution": "1D"
+  },
+  "ok": true,
+  "so_truong": 7,
+  "truong": [
+   "t",
+   "o",
+   "h",
+   "l",
+   "c",
+   "v",
+   "nextTime"
+  ],
+  "mau": {
+   "t": [
+    1785722400,
+    1785808800,
+    1785895200
+   ],
+   "o": [
+    60.9,
+    60.4,
+    59.4
+   ],
+   "h": [
+    61,
+    60.4,
+    60.1
+   ],
+   "l": [
+    60,
+    59,
+    58.6
+   ],
+   "c": [
+    60.3,
+    59.5,
+    58.6
+   ],
+   "v": [
+    6377600,
+    5531900,
+    5288700
+   ],
+   "nextTime": 0
+  },
+  "ghi_chu": "gia DIEU CHINH · kVND · tu 2012-03 · moc t o 02:00 UTC (khac SSI)",
+  "do_luc": "2026-08-13"
+ },
+ "dnse-ohlcs-derivative": {
+  "vendor": "DNSE",
+  "host": "services.entrade.com.vn",
+  "path": "/chart-api/v2/ohlcs/derivative",
+  "method": "GET",
+  "params": {
+   "from": 1785715200,
+   "to": 1786147200,
+   "symbol": "VN30F1M",
+   "resolution": "1D"
+  },
+  "ok": true,
+  "so_truong": 7,
+  "truong": [
+   "t",
+   "o",
+   "h",
+   "l",
+   "c",
+   "v",
+   "nextTime"
+  ],
+  "mau": {
+   "t": [
+    1785722400,
+    1785808800,
+    1785895200
+   ],
+   "o": [
+    1883,
+    1918,
+    1934
+   ],
+   "h": [
+    1925,
+    1926,
+    1942
+   ],
+   "l": [
+    1881.9,
+    1911,
+    1907.4
+   ],
+   "c": [
+    1914,
+    1925,
+    1913.8
+   ],
+   "v": [
+    205554,
+    190633,
+    218000
+   ],
+   "nextTime": 0
+  },
+  "ghi_chu": "phai sinh",
+  "do_luc": "2026-08-13"
+ },
+ "dnse-senses-events": {
+  "vendor": "DNSE",
+  "host": "api-bo.dnse.com.vn",
+  "path": "/senses-api/events",
+  "method": "GET",
+  "params": {
+   "symbol": "VHM",
+   "page": 0
+  },
+  "ok": true,
+  "so_truong": 16,
+  "truong": [
+   "id",
+   "symbol",
+   "eventId",
+   "gdkhqDateOrigin",
+   "ndkccDateOrigin",
+   "timeOrigin",
+   "note",
+   "name",
+   "title",
+   "titleEvent",
+   "content",
+   "fileUrl",
+   "lastUpdate",
+   "eventTypeId",
+   "gdkhqDate",
+   "ndkccDate"
+  ],
+  "mau": {
+   "id": 5115537,
+   "symbol": "VHM",
+   "eventId": 35256221,
+   "gdkhqDateOrigin": "2026-08-06T00:00:00Z",
+   "ndkccDateOrigin": "2026-08-07T00:00:00Z",
+   "timeOrigin": "0001-01-01T00:00:00Z",
+   "note": "Trả cổ tức năm 2025 bằng cổ phiếu tỷ lệ 1:1",
+   "name": "Trả cổ tức bằng cổ phiếu",
+   "title": "Trả cổ tức năm 2025 bằng cổ phiếu tỷ lệ 1:1",
+   "titleEvent": "Trả cổ tức năm 2025 bằng cổ phiếu tỷ lệ 1:1",
+   "content": "Trả cổ tức năm 2025 bằng cổ phiếu tỷ lệ 1:1",
+   "fileUrl": "",
+   "lastUpdate": "2026-07-24T16:49:39Z",
+   "eventTypeId": 1,
+   "gdkhqDate": "2026-08-06T00:00:00Z",
+   "ndkccDate": "2026-08-07T00:00:00Z"
+  },
+  "ghi_chu": "su kien · tran 20/trang · KHONG co ti le dang SO, chi co trong cau chu",
+  "do_luc": "2026-08-13"
+ },
+ "vci-ohlc-gap": {
+  "vendor": "VCI",
+  "host": "trading.vietcap.com.vn",
+  "path": "/api/chart/OHLCChart/gap",
+  "method": "POST",
+  "params": {
+   "timeFrame": "ONE_DAY",
+   "symbols": [
+    "VNM"
+   ],
+   "from": 1785715200,
+   "to": 1786060800
+  },
+  "ok": true,
+  "so_truong": 10,
+  "truong": [
+   "o",
+   "h",
+   "l",
+   "c",
+   "v",
+   "t",
+   "accumulatedVolume",
+   "accumulatedValue",
+   "symbol",
+   "minBatchTruncTime"
+  ],
+  "mau": {
+   "symbol": "VNM",
+   "o": [
+    60900,
+    60400,
+    59400
+   ],
+   "h": [
+    61000,
+    60400,
+    60100
+   ],
+   "l": [
+    60000,
+    59000,
+    58600
+   ],
+   "c": [
+    60300,
+    59500,
+    58600
+   ],
+   "v": [
+    6377600,
+    5531900,
+    5288700
+   ],
+   "t": [
+    "1785715200",
+    "1785801600",
+    "1785888000"
+   ],
+   "accumulatedVolume": [
+    6377600,
+    5531900,
+    5288700
+   ],
+   "accumulatedValue": [
+    384777.74,
+    328979.59,
+    311814.22
+   ],
+   "minBatchTruncTime": "1785715200"
+  },
+  "ghi_chu": "gia DIEU CHINH · VND (khac SSI/DNSE dung kVND) · sau toi 2006-01-19 · CHUA NAP",
+  "do_luc": "2026-08-13"
+ },
+ "vci-ohlc-gap-chart": {
+  "vendor": "VCI",
+  "host": "trading.vietcap.com.vn",
+  "path": "/api/chart/OHLCChart/gap-chart",
+  "method": "POST",
+  "params": {
+   "timeFrame": "ONE_DAY",
+   "symbols": [
+    "VNM"
+   ],
+   "from": 1785715200,
+   "to": 1786060800
+  },
+  "ok": true,
+  "so_truong": 4,
+  "truong": [
+   "message",
+   "payload",
+   "error",
+   "code"
+  ],
+  "mau": {
+   "message": "Invalid params",
+   "payload": {
+    "timeFrame": "ONE_DAY",
+    "symbols": [
+     "VNM"
+    ],
+    "from": 1785715200,
+    "to": 1786060800
+   },
+   "error": true,
+   "code": 400
+  },
+  "ghi_chu": "tra rong",
+  "do_luc": "2026-08-13"
+ },
+ "vci-events": {
+  "vendor": "VCI",
+  "host": "iq.vietcap.com.vn",
+  "path": "/api/iq-insight-service/v1/events",
+  "method": "GET",
+  "params": {
+   "ticker": "VHM",
+   "fromDate": "20260101",
+   "toDate": "20260812",
+   "eventCode": "DIV,ISS",
+   "page": 0,
+   "size": 1
+  },
+  "ok": true,
+  "so_truong": 17,
+  "truong": [
+   "id",
+   "organCode",
+   "eventNameVi",
+   "eventNameEn",
+   "organNameEn",
+   "organNameVi",
+   "ticker",
+   "eventCode",
+   "eventTitleVi",
+   "eventTitleEn",
+   "displayDate1",
+   "displayDate2",
+   "publicDate",
+   "recordDate",
+   "exrightDate",
+   "exerciseRatio",
+   "category"
+  ],
+  "mau": {
+   "id": "69eab80f9a7ad236002b1863",
+   "organCode": "NHN",
+   "eventNameVi": "Phát hành cổ phiếu",
+   "eventNameEn": "Share Issue",
+   "organNameEn": "Vinhomes Joint Stock Company",
+   "organNameVi": "Công ty Cổ phần Vinhomes",
+   "ticker": "VHM",
+   "eventCode": "ISS",
+   "eventTitleVi": "Phát hành cổ phiếu - Trả Cổ tức bằng Cổ phiếu tỉ lệ 100.0%",
+   "eventTitleEn": "Share Issue - Stock dividend ratio 100.0%",
+   "displayDate1": "2026-08-06T00:00:00",
+   "displayDate2": "2026-07-24T00:00:00",
+   "publicDate": "2026-07-24T00:00:00",
+   "recordDate": "2026-08-07T00:00:00",
+   "exrightDate": "2026-08-06T00:00:00",
+   "exerciseRatio": 1.0,
+   "category": "DIVIDEND"
+  },
+  "ghi_chu": "su kien · CO exerciseRatio dang SO · thieu ex_date 115/2931",
+  "do_luc": "2026-08-13"
+ },
+ "vci-company": {
+  "vendor": "VCI",
+  "host": "iq.vietcap.com.vn",
+  "path": "/api/iq-insight-service/v1/company",
+  "method": "GET",
+  "params": {
+   "ticker": "VHM"
+  },
+  "ok": true,
+  "so_truong": 15,
+  "truong": [
+   "organCode",
+   "ticker",
+   "exchange",
+   "organNameEn",
+   "organNameVi",
+   "organShortNameEn",
+   "organShortNameVi",
+   "logoUrl",
+   "website",
+   "marketCap",
+   "marketCapUsd",
+   "sectorNameLv1CustomEn",
+   "sectorNameLv1CustomVi",
+   "sectorNameLv2En",
+   "sectorNameLv2Vi"
+  ],
+  "mau": {
+   "organCode": "ASECO32",
+   "ticker": "A32",
+   "exchange": "UPCOM",
+   "organNameEn": "32 Joint Stock Company",
+   "organNameVi": "Công ty Cổ phần 32",
+   "organShortNameEn": "32 Company",
+   "organShortNameVi": "Công ty 32",
+   "logoUrl": "https://vietcap-website.s3.ap-southeast-1.amazonaws.com/cms/logo/A32.webp",
+   "website": "",
+   "marketCap": 201960000000.0,
+   "marketCapUsd": 7754271.4532539835,
+   "sectorNameLv1CustomEn": "Consumer Goods",
+   "sectorNameLv1CustomVi": "Hàng Tiêu dùng",
+   "sectorNameLv2En": "Personal & Household Goods",
+   "sectorNameLv2Vi": "Hàng cá nhân & Gia dụng"
+  },
+  "ghi_chu": "danh muc cong ty · tham so ticker BI BO QUA, luon tra TOAN BO",
+  "do_luc": "2026-08-13"
+ },
+ "vnstock-bctc-can-doi": {
+  "vendor": "vnstock",
+  "host": "thu vien Python",
+  "path": "vnstock.Vnstock().stock().finance.*",
+  "method": "lib",
+  "params": {
+   "symbol": "VNM",
+   "source": "VCI",
+   "period": "year"
+  },
+  "ok": true,
+  "so_truong": 11,
+  "truong": [
+   "item",
+   "item_en",
+   "item_id",
+   "2025",
+   "2024",
+   "2023",
+   "2022",
+   "2021",
+   "2020",
+   "2019",
+   "2018"
+  ],
+  "mau": {
+   "item": "TÀI SẢN NGẮN HẠN",
+   "item_en": "CURRENT ASSETS",
+   "item_id": "current_assets",
+   "2025": 36261180908033.0,
+   "2024": 37553650065098.0,
+   "2023": 35935879621477.0,
+   "2022": 31560382174201.0,
+   "2021": 36109910649785.0,
+   "2020": 29665725805058.0,
+   "2019": 24721565376552.0,
+   "2018": 20559756794837.0
+  },
+  "ghi_chu": "BCTC — bang can doi ke toan · NGOAI LE 03/08: chi BCTC duoc dung vnstock, CAM dung cho GIA",
+  "do_luc": "2026-08-13"
+ },
+ "vnstock-bctc-kqkd": {
+  "vendor": "vnstock",
+  "host": "thu vien Python",
+  "path": "vnstock.Vnstock().stock().finance.*",
+  "method": "lib",
+  "params": {
+   "symbol": "VNM",
+   "source": "VCI",
+   "period": "year"
+  },
+  "ok": true,
+  "so_truong": 11,
+  "truong": [
+   "item",
+   "item_en",
+   "item_id",
+   "2025",
+   "2024",
+   "2023",
+   "2022",
+   "2021",
+   "2020",
+   "2019",
+   "2018"
+  ],
+  "mau": {
+   "item": "Doanh thu bán hàng và cung cấp dịch vụ",
+   "item_en": "Sales",
+   "item_id": "sales",
+   "2025": 63723520008574.0,
+   "2024": 61823889921880.0,
+   "2023": 60478912566740.0,
+   "2022": 60074730223299.0,
+   "2021": 61012074147764.0,
+   "2020": 59722908393236.0,
+   "2019": 56400229726717.0,
+   "2018": 52629230427284.0
+  },
+  "ghi_chu": "BCTC — ket qua kinh doanh · NGOAI LE 03/08: chi BCTC duoc dung vnstock, CAM dung cho GIA",
+  "do_luc": "2026-08-13"
+ },
+ "vnstock-bctc-luu-chuyen": {
+  "vendor": "vnstock",
+  "host": "thu vien Python",
+  "path": "vnstock.Vnstock().stock().finance.*",
+  "method": "lib",
+  "params": {
+   "symbol": "VNM",
+   "source": "VCI",
+   "period": "year"
+  },
+  "ok": true,
+  "so_truong": 11,
+  "truong": [
+   "item",
+   "item_en",
+   "item_id",
+   "2025",
+   "2024",
+   "2023",
+   "2022",
+   "2021",
+   "2020",
+   "2019",
+   "2018"
+  ],
+  "mau": {
+   "item": "Lợi nhuận/(lỗ) trước thuế",
+   "item_en": "Net profit/(loss) before tax",
+   "item_id": "net_profit_loss_before_tax",
+   "2025": 11649985224938.0,
+   "2024": 11599653741335.0,
+   "2023": 10967899391486.0,
+   "2022": 10495534676745.0,
+   "2021": 12922235486919.0,
+   "2020": 13518536087024.0,
+   "2019": 12795709638557.0,
+   "2018": 12051696266123.0
+  },
+  "ghi_chu": "BCTC — luu chuyen tien te · NGOAI LE 03/08: chi BCTC duoc dung vnstock, CAM dung cho GIA",
+  "do_luc": "2026-08-13"
+ },
+ "vnstock-chi-so": {
+  "vendor": "vnstock",
+  "host": "thu vien Python",
+  "path": "vnstock.Vnstock().stock().finance.*",
+  "method": "lib",
+  "params": {
+   "symbol": "VNM",
+   "source": "VCI",
+   "period": "year"
+  },
+  "ok": true,
+  "so_truong": 19,
+  "truong": [
+   "item",
+   "item_en",
+   "item_id",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018",
+   "2018"
+  ],
+  "mau": {
+   "item": "Năm",
+   "item_en": 0,
+   "item_id": "year",
+   "2018": "2018"
+  },
+  "ghi_chu": "BCTC — chi so tai chinh · NGOAI LE 03/08: chi BCTC duoc dung vnstock, CAM dung cho GIA",
+  "do_luc": "2026-08-13"
+ }
+}
