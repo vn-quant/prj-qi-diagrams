@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PRJ Quantitative Investment — Sơ đồ tầng dữ liệu</title>
+<!-- TRANG NAY SINH TU build.py — dung sua tay, sua roi chay lai se mat. -->
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;
   :root{
-    --bg:#0f172a; --panel:#111c33; --line:#1e293b; --edge:#334155;
-    --fg:#e2e8f0; --dim:#94a3b8; --cy:#22d3ee; --em:#34d399;
-    --am:#fbbf24; --ro:#fb7185; --bl:#60a5fa;
+    --bg:#0f172a; --edge:#334155; --fg:#e2e8f0; --dim:#94a3b8;
+    --cy:#22d3ee; --bl:#60a5fa;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; background:var(--bg); color:var(--fg);
+    margin:0; background:var(--bg); color:var(--fg); overflow:hidden;
     font:14px/1.55 'JetBrains Mono','SF Mono','Cascadia Code',Consolas,monospace;
-    overflow:hidden;
   }
   header{
     position:fixed; inset:0 0 auto 0; z-index:20; background:rgba(15,23,42,.96);
@@ -31,53 +31,51 @@
     white-space:nowrap; transition:.12s;
   }
   .tab:hover{color:var(--fg); border-color:#475569}
-  .tab[aria-selected="true"]{
-    background:rgba(59,130,246,.22); color:#fff; border-color:var(--bl);
-  }
+  .tab[aria-selected="true"]{background:rgba(59,130,246,.22); color:#fff; border-color:var(--bl)}
   .spacer{flex:1}
   .tools{display:flex; align-items:center; gap:6px}
   .btn{
     background:rgba(30,41,59,.7); color:var(--fg); border:1px solid var(--edge);
-    width:30px; height:28px; border-radius:6px; cursor:pointer; font:inherit; font-size:13px;
-    display:grid; place-items:center; transition:.12s;
+    height:28px; min-width:30px; padding:0 8px; border-radius:6px; cursor:pointer;
+    font:inherit; font-size:12px; display:grid; place-items:center; transition:.12s;
   }
   .btn:hover{border-color:var(--cy); color:var(--cy)}
-  .btn.w{width:auto; padding:0 10px; font-size:11px}
-  .pct{
-    min-width:52px; text-align:center; font-size:11px; color:var(--dim);
-    font-variant-numeric:tabular-nums;
-  }
+  .pct{min-width:52px; text-align:center; font-size:11px; color:var(--dim);
+       font-variant-numeric:tabular-nums}
   .dl{color:var(--dim); font-size:11px; text-decoration:none; border-bottom:1px dotted #475569}
   .dl:hover{color:var(--cy); border-color:var(--cy)}
-
-  .meta{
-    padding:0 16px 9px; font-size:11px; color:var(--dim);
-    display:flex; gap:8px; flex-wrap:wrap; align-items:baseline;
-  }
+  .meta{padding:0 16px 9px; font-size:11px; color:var(--dim);
+        display:flex; gap:8px; flex-wrap:wrap; align-items:baseline}
   .meta b{color:var(--fg); font-weight:600}
   .dot{color:var(--edge)}
 
-  main{position:absolute; inset:0; padding-top:var(--hh,86px)}
   .stage{
-    position:absolute; inset:var(--hh,86px) 0 0 0; overflow:hidden;
-    cursor:grab; background:
-      radial-gradient(circle at 1px 1px, #1e293b 1px, transparent 0) 0 0/40px 40px;
+    position:absolute; inset:var(--hh,86px) 0 0 0; overflow:auto;
+    scrollbar-color:#475569 transparent;
   }
-  .stage.drag{cursor:grabbing}
   .stage[hidden]{display:none}
-  .canvas{position:absolute; top:0; left:0; transform-origin:0 0; will-change:transform}
-  .canvas img{display:block; max-width:none; user-select:none; -webkit-user-drag:none}
+  .pad{padding:20px; width:max-content}
+  /* Chu la TEXT THAT: chon duoc, Ctrl+F tim duoc, va net o moi muc phong
+     vi phong bang width/height chu khong phai transform: scale(). */
+  .pad svg{display:block; height:auto}
+  .stage.pan{cursor:grab; user-select:none}
+  .stage.pan.grabbing{cursor:grabbing}
 
   .hint{
     position:fixed; right:14px; bottom:12px; z-index:15; font-size:10.5px; color:var(--dim);
     background:rgba(15,23,42,.92); border:1px solid var(--edge); border-radius:6px;
     padding:6px 10px; pointer-events:none;
   }
-  kbd{
-    background:rgba(51,65,85,.8); border:1px solid #475569; border-radius:3px;
-    padding:0 4px; font:inherit; font-size:10px; color:var(--fg);
-  }
+  kbd{background:rgba(51,65,85,.8); border:1px solid #475569; border-radius:3px;
+      padding:0 4px; font:inherit; font-size:10px; color:var(--fg)}
   @media (max-width:760px){ .meta{display:none} .hint{display:none} }
+
+/* ── db-va-luong-chay-v2 ── */
+#d0 500;600;700&amp;display=swap');
+  text { font-family: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Consolas', monospace; }#d0 .t { fill:#ffffff; font-size:11px; font-weight:600; }#d0 .t12 { fill:#ffffff; font-size:12px; font-weight:700; }#d0 .s { fill:#94a3b8; font-size:9px; }#d0 .s8 { fill:#94a3b8; font-size:8px; }#d0 .n { fill:#cbd5e1; font-size:8.5px; }#d0 .warn { fill:#fb7185; font-size:8.5px; }#d0 .ok { fill:#34d399; font-size:8.5px; }#d0 .amb { fill:#fbbf24; font-size:8.5px; }#d0 .cy { fill:#22d3ee; font-size:9px; font-weight:600; }
+/* ── van-de-ver1-v1 ── */
+#d1 500;600;700&amp;display=swap');
+  text { font-family: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Consolas', monospace; }#d1 .t { fill:#ffffff; font-size:11px; font-weight:600; }#d1 .t12 { fill:#ffffff; font-size:12.5px; font-weight:700; }#d1 .s { fill:#94a3b8; font-size:9px; }#d1 .s8 { fill:#94a3b8; font-size:8px; }#d1 .n { fill:#cbd5e1; font-size:8.5px; }#d1 .warn { fill:#fb7185; font-size:8.5px; }#d1 .ok { fill:#34d399; font-size:8.5px; }#d1 .amb { fill:#fbbf24; font-size:8.5px; }#d1 .q { fill:#fda4af; font-size:9px; font-style:italic; }
 </style>
 </head>
 <body>
@@ -86,160 +84,788 @@
   <div class="bar">
     <div class="brand">PRJ Quantitative Investment <span>· sơ đồ tầng dữ liệu</span></div>
     <div class="tabs" role="tablist">
-      <button class="tab" role="tab" aria-selected="true"  data-v="0">① Kiến trúc DB &amp; luồng chạy</button>
+      <button class="tab" role="tab" aria-selected="true" data-v="0">① Kiến trúc DB &amp; luồng chạy</button>
       <button class="tab" role="tab" aria-selected="false" data-v="1">② Vấn đề ver 1</button>
     </div>
     <div class="spacer"></div>
     <div class="tools">
-      <button class="btn" id="out"  title="Thu nhỏ (−)">−</button>
+      <button class="btn" id="out" title="Thu nhỏ (−)">−</button>
       <div class="pct" id="pct">100%</div>
-      <button class="btn" id="in"   title="Phóng to (+)">+</button>
-      <button class="btn w" id="fit"  title="Vừa khung (F)">vừa khung</button>
-      <button class="btn w" id="one"  title="Kích thước thật (1)">100%</button>
-      <a class="dl" id="dlsvg" href="db-va-luong-chay-v2.svg" download>SVG</a>
-      <a class="dl" id="dlpng" href="db-va-luong-chay-v2@2x.png" download>PNG</a>
+      <button class="btn" id="in" title="Phóng to (+)">+</button>
+      <button class="btn" id="fit" title="Vừa bề ngang (F)">vừa ngang</button>
+      <button class="btn" id="one" title="Kích thước thật (1)">100%</button>
+      <a class="dl" id="dlsvg" href="#" download>SVG</a>
+      <a class="dl" id="dlpng" href="#" download>PNG</a>
     </div>
   </div>
   <div class="meta" id="meta"></div>
 </header>
 
 <main>
-  <!-- ?v= la NGAY CAP NHAT so do. Trinh duyet cache SVG rat lau; khong doi chuoi nay
-       thi nguoi da vao truoc do se thay ban CU. Sua so do => sua luon ngay o day. -->
   <div class="stage" id="s0">
-    <div class="canvas" id="c0"><img src="db-va-luong-chay-v2.svg?v=2026-08-12" alt="Kiến trúc DB và luồng chạy hằng ngày ver 2"></div>
+    <div class="pad" id="p0">
+<svg id="d0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2080 1500">
+
+<defs>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+  </pattern>
+  <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/></marker>
+  <marker id="ac" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/></marker>
+  <marker id="ae" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/></marker>
+  <marker id="av" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa"/></marker>
+  <marker id="ar" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/></marker>
+  <marker id="ab" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#60a5fa"/></marker>
+</defs>
+
+<rect width="100%" height="100%" fill="#0f172a"/>
+<rect width="100%" height="100%" fill="url(#grid)"/>
+
+<!-- TITLE -->
+<text x="40" y="42" fill="#ffffff" font-size="17" font-weight="700">Tầng dữ liệu ver 2 — kiến trúc DB và luồng chạy hằng ngày</text>
+<text x="40" y="63" class="s">quant_v2 · PostgreSQL 17.5 · 962 MB · 204 mã · 2000-07-28 → 2026-08-07 · đo 2026-08-09</text>
+<text x="40" y="79" class="s8">Nguyên tắc gốc: sổ quan sát CHỈ-THÊM (obs) · cấm sửa bằng quyền Postgres · mọi thứ ngoài kho đọc qua tầng đọc (market), không đọc obs</text>
+
+<!-- ═══════════ CỘT TRÁI: KIẾN TRÚC ═══════════ -->
+
+<!-- REGION NGUỒN -->
+<rect x="50" y="100" width="1250" height="200" rx="12" fill="none" stroke="#22d3ee" stroke-width="1" stroke-dasharray="12,4"/>
+<text x="64" y="118" class="cy">① NGUỒN — kiểm kê theo HOST, không theo endpoint (meta.vendor_door + khoá ngoại: không khai được nguồn mà giấu cửa)</text>
+
+<rect x="70" y="130" width="230" height="155" rx="6" fill="#0f172a"/>
+<rect x="70" y="130" width="230" height="155" rx="6" fill="rgba(59,130,246,0.3)" stroke="#60a5fa" stroke-width="2"/>
+<text x="185" y="150" class="t" text-anchor="middle">SSI iBoard</text>
+<text x="185" y="164" class="s8" text-anchor="middle">statistics/charts/history</text>
+<text x="80" y="184" class="n">source  = SSI_IBOARD</text>
+<text x="80" y="197" class="n">basis   = ADJUSTED</text>
+<text x="80" y="210" class="n">đơn vị  = kVND</text>
+<text x="80" y="223" class="n">sâu tới 2000-07-28</text>
+<text x="80" y="236" class="n">631.074 dòng · 204 mã</text>
+<rect x="80" y="245" width="118" height="16" rx="3" fill="rgba(59,130,246,0.5)" stroke="#60a5fa" stroke-width="1"/>
+<text x="139" y="256" fill="#dbeafe" font-size="8" font-weight="700" text-anchor="middle">VAI TRÒ: CHÍNH</text>
+<text x="80" y="275" class="s8">VCI đối chứng độc lập trước 2020</text>
+
+<rect x="320" y="130" width="230" height="155" rx="6" fill="#0f172a"/>
+<rect x="320" y="130" width="230" height="155" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="435" y="150" class="t" text-anchor="middle">DNSE entrade</text>
+<text x="435" y="164" class="s8" text-anchor="middle">chart-api/v2/ohlcs/stock</text>
+<text x="330" y="184" class="n">source  = DNSE</text>
+<text x="330" y="197" class="n">basis   = ADJUSTED</text>
+<text x="330" y="210" class="n">đơn vị  = kVND</text>
+<text x="330" y="223" class="n">chỉ từ 2012-03-19</text>
+<text x="330" y="236" class="n">583.160 dòng · 204 mã</text>
+<rect x="330" y="245" width="126" height="16" rx="3" fill="rgba(30,41,59,0.7)" stroke="#94a3b8" stroke-width="1"/>
+<text x="393" y="256" fill="#cbd5e1" font-size="8" font-weight="700" text-anchor="middle">VAI TRÒ: ĐỐI CHỨNG</text>
+<text x="330" y="275" class="warn">lệch tới 12× ở đầu chuỗi, 16/133 mã</text>
+
+<rect x="570" y="130" width="230" height="155" rx="6" fill="#0f172a"/>
+<rect x="570" y="130" width="230" height="155" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="685" y="150" class="t" text-anchor="middle">SSI iBoard</text>
+<text x="685" y="164" class="s8" text-anchor="middle">statistics/company/stock-price</text>
+<text x="580" y="184" class="n">source  = SSI_SP</text>
+<text x="580" y="197" class="n">basis   = RAW · đơn vị VND</text>
+<text x="580" y="210" class="n">close thô + TRẦN/SÀN</text>
+<text x="580" y="223" class="n">+ khối ngoại + thoả thuận</text>
+<text x="580" y="236" class="n">579.644 dòng</text>
+<text x="580" y="252" class="warn">nguồn TRỘN 2 thang: O/H/L đã điều</text>
+<text x="580" y="263" class="warn">chỉnh, close thô → suy lại O/H/L</text>
+<text x="580" y="275" class="s8">raw_x = adj_x / (adj_close/raw_close)</text>
+
+<rect x="820" y="130" width="230" height="155" rx="6" fill="#0f172a"/>
+<rect x="820" y="130" width="230" height="155" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="935" y="150" class="t" text-anchor="middle">SSI FastConnect</text>
+<text x="935" y="164" class="s8" text-anchor="middle">api/v2/Market/IndexComponents</text>
+<text x="830" y="184" class="n">source = SSI_FC · Bearer token</text>
+<text x="830" y="197" class="n">6 rổ: VN30 VN100 VNMIDCAP</text>
+<text x="830" y="210" class="n">VNDIAMOND VNFINLEAD</text>
+<text x="830" y="223" class="n">VNALLSHARE</text>
+<text x="830" y="240" class="amb">ẢNH CHỤP — không API nào cho</text>
+<text x="830" y="251" class="amb">point-in-time. Ngày không chụp</text>
+<text x="830" y="262" class="amb">là mất VĨNH VIỄN.</text>
+<text x="830" y="277" class="s8">755 dòng, mới từ 2026-08-07</text>
+
+<rect x="1070" y="130" width="220" height="155" rx="6" fill="#0f172a"/>
+<rect x="1070" y="130" width="220" height="155" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1180" y="150" class="t" text-anchor="middle">SỰ KIỆN — 2 nguồn</text>
+<text x="1080" y="168" class="s8">DNSE  api-bo/senses-api/events</text>
+<text x="1080" y="180" class="s8">VCI   iq-insight-service/v1/events</text>
+<text x="1080" y="199" class="n">14.028 dòng · 2002 → 2026</text>
+<text x="1080" y="212" class="n">DNSE_SENSES + VCI_IQ</text>
+<text x="1080" y="229" class="warn">VCI KHÔNG có cột kind →</text>
+<text x="1080" y="240" class="warn">suy từ eventCode + tiêu đề</text>
+<text x="1080" y="256" class="warn">ratio là số ĐÃ DIỄN GIẢI,</text>
+<text x="1080" y="267" class="warn">1.139/6.219 phi lý</text>
+<text x="1080" y="280" class="s8">→ hệ số phải giải từ trần/sàn</text>
+
+<!-- GATE BAR A -->
+<rect x="70" y="315" width="1220" height="40" rx="6" fill="#0f172a"/>
+<rect x="70" y="315" width="1220" height="40" rx="6" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="82" y="331" fill="#fda4af" font-size="9.5" font-weight="700">TẦNG A · CỔNG LÚC BẮT (trong vòng lặp fetch, trước khi ghi)</text>
+<text x="82" y="347" class="n">C-01 low≤open,close≤high từng dòng   ·   C-02 neo thang giá so close phiên trước, nới biên nếu ex_date   ·   C-03 nguồn trả RỖNG khi đáng lẽ có data   ·   C-04 phân trang: totalElements khớp số dòng nhận</text>
+<text x="1180" y="331" class="s8">rớt cổng → ops.quarantine</text>
+
+<line x1="680" y1="355" x2="680" y2="385" stroke="#fb7185" stroke-width="2" marker-end="url(#ar)"/>
+
+<!-- REGION obs -->
+<rect x="50" y="390" width="1250" height="215" rx="12" fill="none" stroke="#a78bfa" stroke-width="1" stroke-dasharray="12,4"/>
+<text x="64" y="408" fill="#a78bfa" font-size="9" font-weight="600">② obs — SỔ QUAN SÁT · CHỈ INSERT · Postgres CƯỠNG CHẾ cấm sửa</text>
+
+<rect x="70" y="420" width="230" height="105" rx="6" fill="#0f172a"/>
+<rect x="70" y="420" width="230" height="105" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="185" y="440" class="t" text-anchor="middle">obs.price_daily</text>
+<text x="80" y="457" class="s8">27 phân mảnh theo năm</text>
+<text x="80" y="471" class="n">PK: source, security_id,</text>
+<text x="80" y="483" class="n">    trade_date, observed_at</text>
+<text x="80" y="499" class="ok">1.793.878 dòng (3 nguồn)</text>
+<text x="80" y="514" class="s8">price_unit · price_basis · run_id</text>
+
+<rect x="320" y="420" width="230" height="105" rx="6" fill="#0f172a"/>
+<rect x="320" y="420" width="230" height="105" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="435" y="440" class="t" text-anchor="middle">obs.corp_action</text>
+<text x="330" y="457" class="s8">sự kiện doanh nghiệp, 2 nguồn</text>
+<text x="330" y="473" class="n">ex_date · kind · ratio</text>
+<text x="330" y="485" class="n">cash_vnd · issue_price · title</text>
+<text x="330" y="501" class="ok">14.028 dòng · 6,5 MB</text>
+<text x="330" y="516" class="s8">khử trùng thêm ở schema 090</text>
+
+<rect x="570" y="420" width="230" height="105" rx="6" fill="#0f172a"/>
+<rect x="570" y="420" width="230" height="105" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="685" y="440" class="t" text-anchor="middle">obs.index_daily</text>
+<text x="580" y="457" class="s8">5 rổ chỉ số — NỀN của lịch</text>
+<text x="580" y="473" class="n">17.998 dòng</text>
+<text x="580" y="485" class="n">2000-07-28 → 2026-08-07</text>
+<text x="580" y="502" class="warn">từng có 4 bản sao mỗi dòng</text>
+<text x="580" y="516" class="s8">chữa bằng băm nội dung (130)</text>
+
+<rect x="820" y="420" width="230" height="105" rx="6" fill="#0f172a"/>
+<rect x="820" y="420" width="230" height="105" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="935" y="440" class="t" text-anchor="middle">obs.index_member</text>
+<text x="830" y="457" class="s8">ảnh chụp thành phần rổ</text>
+<text x="830" y="473" class="n">755 dòng · từ 2026-08-07</text>
+<text x="830" y="490" class="amb">NGOẠI LỆ: không có payload_hash</text>
+<text x="830" y="501" class="amb">— chụp mỗi ngày là CỐ Ý</text>
+<text x="830" y="516" class="s8">ngày đầu đã bắt TAL lọt universe</text>
+
+<rect x="1070" y="420" width="220" height="105" rx="6" fill="#0f172a"/>
+<rect x="1070" y="420" width="220" height="105" rx="6" fill="rgba(136,19,55,0.25)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="1180" y="438" fill="#fda4af" font-size="9.5" font-weight="700" text-anchor="middle">TẦNG B · CỔNG LÚC GHI</text>
+<text x="1080" y="455" class="n">C-05 REVOKE UPDATE,DELETE</text>
+<text x="1080" y="467" class="s8">    + ALTER DEFAULT PRIVILEGES</text>
+<text x="1080" y="482" class="n">C-06 CHECK price_unit</text>
+<text x="1080" y="493" class="s8">    + CHECK price_basis</text>
+<text x="1080" y="508" class="n">C-07 UNIQUE khoá + payload_hash</text>
+<text x="1080" y="520" class="s8">    ON CONFLICT DO NOTHING</text>
+
+<text x="70" y="547" class="ok">observed_at (LÚC TA THẤY) tách hẳn khỏi trade_date (NGÀY CỦA PHIÊN) — đây là thứ cho phép hỏi "mặt bằng giá lúc ĐÓ", và là thứ ver 1 không có</text>
+<text x="70" y="563" class="amb">Nguồn chia lại lịch sử → job GHI THÊM một observed_at mới, KHÔNG đè. Mỗi lần nạp lại là một bản quan sát. iBoard 6.509 ô đã có &gt;1 bản · DNSE 12.596 ô</text>
+<text x="70" y="579" class="warn">⚠ Quan sát SỚM NHẤT trong kho = 2026-08-01 (DNSE) / 2026-08-02 (iBoard, SSI_SP). Trước mốc đó KHÔNG có vintage nào — hệ quả ở ghi chú dưới px_adj_as_of()</text>
+<text x="70" y="595" class="s8">Đơn vị KHÔNG được quy đổi khi ghi — obs giữ nguyên đơn vị nguồn (kVND hoặc VND). Quy đổi là việc của tầng đọc.</text>
+
+<line x1="680" y1="605" x2="680" y2="640" stroke="#a78bfa" stroke-width="2" marker-end="url(#av)"/>
+
+<!-- REGION market -->
+<rect x="50" y="645" width="1250" height="235" rx="12" fill="none" stroke="#34d399" stroke-width="1" stroke-dasharray="12,4"/>
+<text x="64" y="663" fill="#34d399" font-size="9" font-weight="600">③ market — TẦNG ĐỌC · đơn vị chuẩn VND · mọi thứ ngoài kho đọc qua đây</text>
+
+<rect x="70" y="675" width="230" height="98" rx="6" fill="#0f172a"/>
+<rect x="70" y="675" width="230" height="98" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+<text x="185" y="694" class="t" text-anchor="middle">market.px_raw</text>
+<text x="80" y="710" class="ok">578.734 dòng · giá THÔ, VND</text>
+<text x="80" y="725" class="n">close LUÔN là số ĐO</text>
+<text x="80" y="738" class="warn">O/H/L chỉ HOSE &amp; chỉ khi qua C-01</text>
+<text x="80" y="749" class="s8">HOSE 98,5% · HNX 0% · UPCoM 0%</text>
+<text x="80" y="765" class="n">+ ceiling/floor/khối ngoại/total_value</text>
+
+<rect x="320" y="675" width="230" height="98" rx="6" fill="#0f172a"/>
+<rect x="320" y="675" width="230" height="98" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+<text x="435" y="694" class="t" text-anchor="middle">market.px_adj</text>
+<text x="330" y="710" class="ok">630.872 dòng · mặt bằng HÔM NAY</text>
+<text x="330" y="725" class="n">CHỌN NGUỒN THEO MÃ,</text>
+<text x="330" y="736" class="n">KHÔNG theo từng dòng</text>
+<text x="330" y="750" class="s8">iBoard trừ khi thủng &gt;10% → DNSE</text>
+<text x="330" y="765" class="warn">THIẾU cột total_value → cấm nhân</text>
+
+<rect x="570" y="675" width="230" height="98" rx="6" fill="#0f172a"/>
+<rect x="570" y="675" width="230" height="98" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="2"/>
+<text x="685" y="694" class="t" text-anchor="middle">px_adj_as_of(ngày)</text>
+<text x="580" y="710" class="s8">hàm SQL STABLE — mặt bằng ngày bất kỳ</text>
+<text x="580" y="725" class="n">lọc observed_at &lt;= as_of</text>
+<text x="580" y="741" class="warn">⚠ TRẢ RỖNG với mọi mốc</text>
+<text x="580" y="752" class="warn">trước 2026-08-01 — im lặng</text>
+<text x="580" y="766" class="warn">⚠ chạy &gt;400s</text>
+
+<rect x="820" y="675" width="230" height="98" rx="6" fill="#0f172a"/>
+<rect x="820" y="675" width="230" height="98" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+<text x="935" y="694" class="t" text-anchor="middle">market.factor_exchange</text>
+<text x="830" y="710" class="ok">577.571 dòng — ĐÁP ÁN</text>
+<text x="830" y="726" class="n">ref_sàn = (trần + sàn) / 2</text>
+<text x="830" y="738" class="n">hệ số = ref_sàn / close phiên trước</text>
+<text x="830" y="753" class="s8">C+F=2R nên KHÔNG cần biết biên độ</text>
+<text x="830" y="766" class="s8">(biên độ đổi theo thời gian)</text>
+
+<rect x="1070" y="675" width="220" height="98" rx="6" fill="#0f172a"/>
+<rect x="1070" y="675" width="220" height="98" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+<text x="1180" y="694" class="t" text-anchor="middle">market.ca / ca_verified</text>
+<text x="1080" y="710" class="n">ca          8.274 dòng</text>
+<text x="1080" y="723" class="n">ca_verified 3.455 ex-date</text>
+<text x="1080" y="739" class="amb">2.889 (83,6%) đã được SÀN</text>
+<text x="1080" y="750" class="amb">kiểm chứng — cột da_kiem_chung</text>
+<text x="1080" y="766" class="s8">backtest chỉ lấy da_kiem_chung</text>
+
+<rect x="70" y="785" width="470" height="55" rx="6" fill="#0f172a"/>
+<rect x="70" y="785" width="470" height="55" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+<text x="305" y="803" class="t" text-anchor="middle">market.trading_calendar — 8.966 dòng</text>
+<text x="80" y="819" class="n">DẪN XUẤT TỪ CHỈ SỐ, không gõ cứng ngày nghỉ, không hết hạn</text>
+<text x="80" y="833" class="s8">suy từ bảng giá cổ phiếu là lập luận vòng: không phân biệt "mã thủng" với "cả sàn nghỉ"</text>
+
+<rect x="560" y="785" width="250" height="55" rx="6" fill="#0f172a"/>
+<rect x="560" y="785" width="250" height="55" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+<text x="685" y="803" class="t" text-anchor="middle">market.index_member</text>
+<text x="570" y="819" class="n">379 dòng — mã thuộc rổ nào, từ ngày nào</text>
+<text x="570" y="833" class="warn" font-size="7.6">từ 2026-08-07 → backtest lùi: survivorship bias</text>
+
+<rect x="830" y="785" width="460" height="55" rx="6" fill="#0f172a"/>
+<rect x="830" y="785" width="460" height="55" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="1060" y="803" fill="#fde68a" font-size="10" font-weight="700" text-anchor="middle">HAI QUY TẮC CỦA TẦNG ĐỌC — mỗi cái chữa một lỗi đã xảy ra thật</text>
+<text x="840" y="819" class="n">① KHOANH NGUỒN — thêm nguồn thứ 3 khác đơn vị đã chặn oan 2.610 dòng đúng</text>
+<text x="840" y="833" class="n">② TÁCH QUAN SÁT KHỎI SUY LUẬN — obs chứa O/H/L do TA SUY, view lọc khi đọc</text>
+
+<text x="70" y="866" class="warn">⚠ VOLUME KHÔNG BAO GIỜ ĐƯỢC ĐIỀU CHỈNH (iBoard: 6.481/6.509 ô đổi giá nhưng chỉ 180 ô đổi volume) → close_adj × volume SAI đúng bằng hệ số. VHM: 142 tỷ thay vì 284 tỷ.</text>
+
+<line x1="680" y1="880" x2="680" y2="912" stroke="#34d399" stroke-width="2" marker-end="url(#ae)"/>
+
+<!-- CONSUMERS -->
+<rect x="70" y="917" width="1220" height="48" rx="6" fill="#0f172a"/>
+<rect x="70" y="917" width="1220" height="48" rx="6" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="82" y="936" class="t">④ NGƯỜI DÙNG — backtest · nghiên cứu alpha · Council · webapp</text>
+<text x="82" y="953" class="n">Chỉ báo BẤT BIẾN theo thang giá (RSI · MA cross · MACD · Bollinger · Ichimoku · ROC) an toàn qua mọi lần điều chỉnh (đo: 0–0,2% phiên đổi tín hiệu)</text>
+<text x="700" y="936" class="warn">Rule phụ thuộc MỨC GIÁ hỏng nặng: ngưỡng giá tuyệt đối 65,1% phiên đổi · bước giá HOSE 65,1% · lọc thanh khoản 14–20%</text>
+
+<!-- meta / ops rails -->
+<rect x="50" y="985" width="620" height="118" rx="12" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="8,4"/>
+<text x="64" y="1003" fill="#cbd5e1" font-size="9" font-weight="600">meta — DANH MỤC, cắt ngang mọi tầng</text>
+<text x="66" y="1021" class="n">meta.securities</text><text x="200" y="1021" class="s8">security_id · symbol · exchange</text>
+<text x="66" y="1037" class="n">meta.universe</text><text x="200" y="1037" class="s8">197 mã active — nguồn của vòng lặp job</text>
+<text x="66" y="1053" class="n">meta.source_contract</text><text x="200" y="1053" class="s8">price_unit · price_basis · VAI TRÒ (CHÍNH/ĐỐI CHỨNG)</text>
+<text x="66" y="1069" class="n">meta.vendor_door</text><text x="200" y="1069" class="s8">vendor · host · path — DNSE 4 cửa · SSI 7 · VCI 4</text>
+<text x="66" y="1090" class="amb">Job đọc VAI TRÒ từ đây, KHÔNG gán cứng tên nguồn trong code (bất biến I10)</text>
+
+<rect x="690" y="985" width="610" height="118" rx="12" fill="none" stroke="#fbbf24" stroke-width="1" stroke-dasharray="8,4"/>
+<text x="704" y="1003" fill="#fbbf24" font-size="9" font-weight="600">ops — VẬN HÀNH, truy vết</text>
+<text x="706" y="1021" class="n">ops.run_ledger</text><text x="840" y="1021" class="s8">mỗi lần chạy 1 dòng: run_id · job · status · scope</text>
+<text x="706" y="1037" class="n">ops.fetch_log</text><text x="840" y="1037" class="s8">TỪNG MÃ TỪNG NGÀY: ok · n_bars · n_thieu · ngay_thieu</text>
+<text x="706" y="1053" class="n">ops.quarantine</text><text x="840" y="1053" class="s8">12.723 dòng bị cách ly — chưa phân loại</text>
+<text x="706" y="1069" class="n">ops.source_freshness</text><text x="840" y="1069" class="s8">ngưỡng tuổi TỪNG NGUỒN (không gộp)</text>
+<text x="706" y="1090" class="amb">ops.status = dead-man 36h + tuổi từng nguồn + tồn cách ly → mã thoát 0/2</text>
+
+<!-- ═══════════ CỘT PHẢI: LUỒNG CHẠY ═══════════ -->
+<rect x="1330" y="100" width="710" height="1290" rx="12" fill="none" stroke="#60a5fa" stroke-width="1" stroke-dasharray="12,4"/>
+<text x="1344" y="118" fill="#60a5fa" font-size="10" font-weight="700">LUỒNG CHẠY HẰNG NGÀY — Task Scheduler `PRJQI_DailyUpdate`, 17:30 ICT</text>
+<text x="1344" y="134" class="s8">Điểm vào duy nhất: C:\Users\OS\Lucius\Projects\PRJ Quantitative Investment\3. Build\chay_hang_ngay.bat (41 dòng)</text>
+<text x="1344" y="148" class="s8">PY = C:\Users\OS\Lucius\Projects\PRJ quant\.venv\Scripts\python.exe   ·   mã thoát lấy của status.py: 0 sạch · 2 có ĐỎ</text>
+
+<!-- step 1 -->
+<rect x="1350" y="162" width="670" height="176" rx="6" fill="#0f172a"/>
+<rect x="1350" y="162" width="670" height="176" rx="6" fill="rgba(59,130,246,0.3)" stroke="#60a5fa" stroke-width="2"/>
+<circle cx="1372" cy="182" r="12" fill="rgba(59,130,246,0.6)" stroke="#60a5fa" stroke-width="1.5"/>
+<text x="1372" y="186" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">1</text>
+<text x="1392" y="186" class="t12">daily_update.py</text>
+<text x="1530" y="186" class="s8">381 dòng · GIÁ NGUỒN CHÍNH · không tham số = đọc vai trò từ DB</text>
+<text x="1360" y="205" class="cy">Bước 0 · chuẩn bị (1 kết nối OWNER)</text>
+<text x="1360" y="219" class="n">uni  ← meta.universe JOIN securities WHERE active        NEO  ← close phiên ngay TRƯỚC cửa sổ, LỌC source=%s</text>
+<text x="1360" y="232" class="s8">                                                          (không lọc source → neo 22.600 VND so 22,6 kVND ⇒ 2.610 dòng chặn oan)</text>
+<text x="1360" y="246" class="n">DANG_LUU ← ảnh chụp giá đang lưu trong cửa sổ 30 ngày     LICH ← market.trading_calendar (theo SÀN)</text>
+<text x="1360" y="259" class="n">EX   ← tập (security_id, ex_date) để nới biên C-02        SAN  ← ánh xạ exchange → HOSE/HNX/KHAC</text>
+<text x="1360" y="278" class="cy">Bước 1 · vòng lặp từng mã</text>
+<text x="1360" y="292" class="n">goi(sym) → HTTP 45s. Gặp 429 thì CHỜ 5s rồi thử lại — CẤM NHẢY NGUỒN. THROTTLE 0,2s.</text>
+<text x="1360" y="306" class="amb">da_dieu_chinh_lai(sid, j): đếm ngày CŨ có |giá mới − giá lưu| / giá lưu &gt; 0,2% ⇒ nguồn đã chia lại lịch sử</text>
+<text x="1360" y="319" class="ok">   ⇒ nếu &gt;0: nạp TOÀN BỘ lịch sử mã đó, không chỉ cửa sổ. GHI THÊM observed_at mới, KHÔNG đè.</text>
+<text x="1360" y="332" class="s8">   KHÔNG hỏi bảng sự kiện — bảng đó sót thật. So CHÍNH DỮ LIỆU. Đã nổ thật: PLX 2.318 phiên · VHM 2.053 phiên.</text>
+
+<!-- step 2 -->
+<rect x="1350" y="348" width="670" height="86" rx="6" fill="#0f172a"/>
+<rect x="1350" y="348" width="670" height="86" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+<circle cx="1372" cy="368" r="12" fill="rgba(8,51,68,0.8)" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1372" y="372" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">2</text>
+<text x="1392" y="372" class="t12">daily_update.py --source DNSE</text>
+<text x="1660" y="372" class="s8">GIÁ ĐỐI CHỨNG — CÙNG job, CÙNG mọi phép kiểm</text>
+<text x="1360" y="391" class="n">Cùng file, chỉ đổi tham số. Bảng NGUON{} khai url/params/bóc cho từng nguồn → thêm nguồn = thêm 1 mục, không sửa luồng.</text>
+<text x="1360" y="405" class="warn">Bài học: bản đầu batch CHỈ nạp DNSE. iBoard đứng 5 ngày mà ops.status vẫn xanh vì nó hỏi max(trade_date) GỘP mọi nguồn.</text>
+<text x="1360" y="419" class="ok">→ Chữa bằng ops.source_freshness (tuổi TỪNG NGUỒN) + bất biến I3 (mọi nguồn phải nằm trong batch).</text>
+
+<!-- step 3 -->
+<rect x="1350" y="444" width="670" height="100" rx="6" fill="#0f172a"/>
+<rect x="1350" y="444" width="670" height="100" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+<circle cx="1372" cy="464" r="12" fill="rgba(8,51,68,0.8)" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1372" y="468" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">3</text>
+<text x="1392" y="468" class="t12">load_ssi_sp.py --window</text>
+<text x="1640" y="468" class="s8">244 dòng · GIÁ THÔ + TRẦN/SÀN — nguồn DUY NHẤT có trần/sàn</text>
+<text x="1360" y="487" class="n">--window ⇒ chỉ năm hiện tại. Phân trang PS=250 (trần cứng của nguồn, khai lớn hơn vẫn trả 250).</text>
+<text x="1360" y="501" class="n">buoc_gia(p): HOSE &lt;10k→10đ · 10k–49,95k→50đ · ≥50k→100đ.   F_on_dinh(): hệ số adj/raw có ổn định trong ngày không (ngưỡng 0,10).</text>
+<text x="1360" y="515" class="amb">SUY raw O/H/L: raw_x = adj_x / (adj_close / raw_close) — hệ số CÙNG NGÀY nên không cần bảng sự kiện. Đúng 570/570 ở HOSE.</text>
+<text x="1360" y="529" class="warn">Hỏng ở UPCoM: sàn đó dùng giá bình quân làm tham chiếu ⇒ hệ số nhảy từng ngày. View trả NULL cho O/H/L ngoài HOSE.</text>
+
+<!-- step 4 -->
+<rect x="1350" y="554" width="670" height="72" rx="6" fill="#0f172a"/>
+<rect x="1350" y="554" width="670" height="72" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+<circle cx="1372" cy="574" r="12" fill="rgba(8,51,68,0.8)" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1372" y="578" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">4</text>
+<text x="1392" y="578" class="t12">load_index.py</text>
+<text x="1530" y="578" class="s8">75 dòng · 5 rổ chỉ số — chạy TRƯỚC vì lịch giao dịch dẫn xuất từ đây</text>
+<text x="1360" y="597" class="n">Thứ tự bắt buộc: chỉ số phải có trước, vì market.trading_calendar suy từ obs.index_daily.</text>
+<text x="1360" y="611" class="warn">Lỗi B10 của ver 1: lịch gõ cứng ngày nghỉ → vỡ 2 lần. Ver 2 dẫn xuất nên không bao giờ hết hạn.</text>
+
+<!-- step 5 -->
+<rect x="1350" y="636" width="670" height="72" rx="6" fill="#0f172a"/>
+<rect x="1350" y="636" width="670" height="72" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+<circle cx="1372" cy="656" r="12" fill="rgba(120,53,15,0.7)" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="1372" y="660" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">5</text>
+<text x="1392" y="660" class="t12">load_index_member.py</text>
+<text x="1590" y="660" class="s8">115 dòng · ẢNH CHỤP THÀNH PHẦN RỔ · SSI FastConnect, Bearer</text>
+<text x="1360" y="679" class="amb">Không API nào cho point-in-time. NGÀY NÀO KHÔNG CHỤP LÀ MẤT VĨNH VIỄN — đây là lý do nó nằm trong batch hằng ngày.</text>
+<text x="1360" y="693" class="n">Ngày đầu chạy đã bắt được TAL thuộc VN100 mà lọt khỏi universe. Cố ý KHÔNG có payload_hash (trùng theo ngày là đúng ý đồ).</text>
+
+<!-- step 6 -->
+<rect x="1350" y="718" width="670" height="86" rx="6" fill="#0f172a"/>
+<rect x="1350" y="718" width="670" height="86" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+<circle cx="1372" cy="738" r="12" fill="rgba(8,51,68,0.8)" stroke="#22d3ee" stroke-width="1.5"/>
+<text x="1372" y="742" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">6</text>
+<text x="1392" y="742" class="t12">daily_events.py</text>
+<text x="1550" y="742" class="s8">238 dòng · SỰ KIỆN 2 NGUỒN · idempotent</text>
+<text x="1360" y="761" class="n">lay_dnse() + lay_vci() → chuẩn hoá → INSERT obs.corp_action. Kèm C-04 (kiểm phân trang) và C-17 (đối chiếu chéo 2 nguồn).</text>
+<text x="1360" y="775" class="warn">C-17 phải so TẬP với TẬP, cấm .first() — cài sai đã sinh 116 báo động giả trên 12 ca lệch thật.</text>
+<text x="1360" y="789" class="s8">Bảng sự kiện HOÃN CÓ CHỦ Ý tới lúc backtest — vướng mắc ghi ở issues\TASK-006.md. Tầng giá KHÔNG phụ thuộc vào nó.</text>
+
+<!-- step 7 -->
+<rect x="1350" y="814" width="670" height="200" rx="6" fill="#0f172a"/>
+<rect x="1350" y="814" width="670" height="200" rx="6" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="2"/>
+<circle cx="1372" cy="834" r="12" fill="rgba(136,19,55,0.8)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="1372" y="838" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">7</text>
+<text x="1392" y="838" class="t12">test_bat_bien.py</text>
+<text x="1550" y="838" class="s8">222 dòng · 10 BẤT BIẾN CẤU TRÚC — thứ chặn khuôn lỗi lặp lại</text>
+<text x="1360" y="857" class="s8">Khác test_spec_vs_code.py: file kia hỏi "phép kiểm trong đặc tả đã cài chưa?". File này hỏi "quyết định đã áp cho MỌI chỗ nó chạm chưa?"</text>
+<text x="1360" y="877" class="n">I1  mọi bảng obs.* có observed_at trong PK PHẢI có chỉ mục unique trên NỘI DUNG (payload_hash)</text>
+<text x="1360" y="891" class="n">I2  mọi nguồn giá PHẢI có ngưỡng tuổi trong ops.source_freshness</text>
+<text x="1360" y="905" class="n">I3  mọi nguồn PHẢI được job hằng ngày làm mới (có mặt trong chay_hang_ngay.bat)</text>
+<text x="1360" y="919" class="n">I4  mọi meta.source_contract PHẢI khai đủ vendor / host / path</text>
+<text x="1360" y="933" class="n">I5  obs cấm sửa — với MỌI bảng, kể cả bảng thêm sau</text>
+<text x="1360" y="947" class="n">I6  mọi câu lệnh chạm obs.price_daily PHẢI lọc theo source</text>
+<text x="1360" y="961" class="n">I7  view và hàm cùng logic PHẢI cho cùng kết quả (px_adj vs px_adj_as_of(now))</text>
+<text x="1360" y="975" class="n">I8  mọi job trong batch PHẢI ghi vết vào ops.run_ledger</text>
+<text x="1360" y="989" class="n">I9  nguồn khai CHÍNH phải đúng là nguồn tầng đọc dùng nhiều nhất</text>
+<text x="1360" y="1003" class="n">I10 batch PHẢI chạy nguồn CHÍNH bằng mặc định, KHÔNG gán cứng tên nguồn</text>
+
+<!-- step 8 -->
+<rect x="1350" y="1024" width="670" height="86" rx="6" fill="#0f172a"/>
+<rect x="1350" y="1024" width="670" height="86" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+<circle cx="1372" cy="1044" r="12" fill="rgba(120,53,15,0.7)" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="1372" y="1048" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">8</text>
+<text x="1392" y="1048" class="t12">status.py --ghi</text>
+<text x="1540" y="1048" class="s8">46 dòng · trả lời được KỂ CẢ khi mọi job đã chết im lặng nhiều ngày</text>
+<text x="1360" y="1067" class="n">dead-man 36h · tuổi TỪNG NGUỒN (không gộp) · tồn cách ly → ghi ops_status.txt + mã thoát cho Task Scheduler</text>
+<text x="1360" y="1081" class="n">Xem LastTaskResult là biết đêm qua có vấn đề gì không: 0 = sạch, 2 = có ĐỎ.</text>
+<text x="1360" y="1095" class="s8">Trạng thái 2026-08-09 17:57 → "✅ tất cả xanh"</text>
+
+<!-- log outputs -->
+<rect x="1350" y="1130" width="670" height="100" rx="6" fill="#0f172a"/>
+<rect x="1350" y="1130" width="670" height="100" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+<text x="1685" y="1150" class="t" text-anchor="middle">YÊU CẦU ④ · FILE LOG — truy vết mà không cần mở Postgres</text>
+<text x="1360" y="1169" class="n">logs\INDEX.csv</text><text x="1520" y="1169" class="s8">mỗi lần chạy một dòng</text>
+<text x="1360" y="1184" class="n">logs\YYYY-MM-DD_daily_update_&lt;NGUỒN&gt;.csv</text><text x="1720" y="1184" class="s8">MỘT DÒNG MỖI MÃ</text>
+<text x="1360" y="1199" class="n">logs\YYYY-MM-DD_daily_events.csv</text><text x="1650" y="1199" class="s8">197 dòng/ngày</text>
+<text x="1360" y="1218" class="ok">Cột `ngay_thieu` liệt kê ĐÚNG NGÀY NÀO thiếu — đây là thứ đáp yêu cầu ③ (ngắt quãng phải truy vết được)</text>
+
+<!-- checks tier C/D -->
+<rect x="1350" y="1246" width="670" height="128" rx="6" fill="#0f172a"/>
+<rect x="1350" y="1246" width="670" height="128" rx="6" fill="rgba(136,19,55,0.25)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="1685" y="1266" class="t" text-anchor="middle">TẦNG C &amp; D · PHÉP KIỂM SAU KHI CHẠY — 18 mã C-01…C-18</text>
+<text x="1360" y="1285" class="n">TẦNG C (cuối job): C-08 đủ mã · C-09 đủ ngày so LỊCH SÀN · C-10 observed_at ≥ trade_date · C-11 · C-12</text>
+<text x="1360" y="1299" class="n">TẦNG D (định kỳ, check_c11_c15.py 235 dòng): C-13 · C-14 · C-15 · C-16 · C-17 · C-18</text>
+<text x="1360" y="1318" class="ok">C-11  px_adj(d, as_of=d) == px_raw(d)          HOSE 98,1% · HNX 94,9% · UPCoM 44,0%</text>
+<text x="1360" y="1332" class="ok">C-14  hai lần quan sát dựng ra CÙNG giá thô    mở khoá 2026-08-03 khi PLX công bố cổ tức</text>
+<text x="1360" y="1346" class="warn">C-15  hệ số ta tính vs hệ số SÀN công bố       82,3% — 432/2.445 ex-date lệch</text>
+<text x="1360" y="1360" class="warn">C-13  thô × TÍCH hệ số = điều chỉnh            78,1% — ĐỎ, và không thể xanh: bảng sự kiện thủng 13,9%</text>
+
+<!-- LEGEND -->
+<rect x="50" y="1125" width="1250" height="120" rx="8" fill="rgba(15,23,42,0.9)" stroke="#334155" stroke-width="1"/>
+<text x="64" y="1145" fill="#e2e8f0" font-size="10" font-weight="700">CHÚ GIẢI</text>
+<rect x="66" y="1155" width="14" height="11" rx="2" fill="rgba(59,130,246,0.3)" stroke="#60a5fa" stroke-width="1.5"/><text x="88" y="1165" class="s">nguồn CHÍNH / bước quan trọng nhất</text>
+<rect x="330" y="1155" width="14" height="11" rx="2" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/><text x="352" y="1165" class="s">nguồn dữ liệu / job nạp</text>
+<rect x="560" y="1155" width="14" height="11" rx="2" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/><text x="582" y="1165" class="s">bảng obs (chỉ INSERT)</text>
+<rect x="790" y="1155" width="14" height="11" rx="2" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/><text x="812" y="1165" class="s">view market (tầng đọc)</text>
+<rect x="1020" y="1155" width="14" height="11" rx="2" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="1.5"/><text x="1042" y="1165" class="s">cổng / phép kiểm / chỗ đang hỏng</text>
+<rect x="66" y="1176" width="14" height="11" rx="2" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/><text x="88" y="1186" class="s">quy tắc bắt buộc / cảnh báo thiết kế</text>
+<rect x="330" y="1176" width="14" height="11" rx="2" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="352" y="1186" class="s">danh mục / người dùng cuối</text>
+<text x="560" y="1186" class="ok">chữ xanh = đang đạt</text>
+<text x="790" y="1186" class="amb">chữ vàng = quy tắc phải nhớ</text>
+<text x="1020" y="1186" class="warn">chữ đỏ = đang hỏng / bẫy đã sập</text>
+<text x="66" y="1210" class="s8">Mã C-xx tra ở: C:\Users\OS\Lucius\Projects\PRJ Quantitative Investment\2. Data design\main\BANG_TRA_MA_KIEM.md   ·   Mã E#### tra ở: C:\Users\OS\Lucius\Projects\PRJ quant\09_other\evidence\INDEX.md</text>
+<text x="66" y="1226" class="s8">Mã nguồn: C:\Users\OS\Lucius\Projects\PRJ Quantitative Investment\3. Build\code\   ·   Schema (14 file 010→140): C:\Users\OS\Lucius\Projects\PRJ Quantitative Investment\3. Build\schema\</text>
+<text x="66" y="1240" class="s8">Sơ đồ này thay db-redesign-v1 + daily-run-v1 (vẽ 30–31/07, trước khi chốt iBoard làm nguồn chính ngày 02/08). Số liệu đo từ DB thật ngày 2026-08-09.</text>
+
+<text x="50" y="1420" class="s8">PRJ Quantitative Investment · db-va-luong-chay-v2 · 2026-08-09</text>
+</svg>
+    </div>
   </div>
   <div class="stage" id="s1" hidden>
-    <div class="canvas" id="c1"><img src="van-de-ver1-v1.svg?v=2026-08-12" alt="Vấn đề của ver 1 và khuôn lỗi còn sống trong ver 2"></div>
+    <div class="pad" id="p1">
+<svg id="d1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1420">
+
+<defs>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+  </pattern>
+  <marker id="ar" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/></marker>
+  <marker id="ae" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/></marker>
+  <marker id="aa" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24"/></marker>
+</defs>
+
+<rect width="100%" height="100%" fill="#0f172a"/>
+<rect width="100%" height="100%" fill="url(#grid)"/>
+
+<text x="40" y="42" fill="#ffffff" font-size="17" font-weight="700">Ver 1 hỏng vì gì — và khuôn lỗi nào còn sống trong ver 2</text>
+<text x="40" y="63" class="s">quant_db (ver 1) · 4 lần audit + 1 lần thiết kế lại vẫn hỏng · đập đi làm lại 27/07/2026</text>
+
+<!-- ROOT CAUSE -->
+<rect x="40" y="88" width="1100" height="96" rx="8" fill="#0f172a"/>
+<rect x="40" y="88" width="1100" height="96" rx="8" fill="rgba(136,19,55,0.45)" stroke="#fb7185" stroke-width="2.5"/>
+<text x="590" y="112" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">CHẨN ĐOÁN GỐC</text>
+<text x="590" y="137" fill="#fecdd3" font-size="15" font-weight="700" text-anchor="middle">MỘT bảng giá SỬA ĐƯỢC · NHIỀU nơi ghi vào với NGỮ NGHĨA KHÁC NHAU</text>
+<text x="590" y="160" class="n" text-anchor="middle">Bảng cho phép UPDATE/DELETE. Mỗi script ghi vào theo hiểu biết riêng: đơn vị riêng, thang giá riêng, nguồn riêng.</text>
+<text x="590" y="175" class="n" text-anchor="middle">Không có gì phân biệt "lúc phiên xảy ra" với "lúc ta thấy" ⇒ sửa xong là mất dấu, không truy được ai ghi cái gì lúc nào.</text>
+
+<!-- USER QUOTE -->
+<rect x="1170" y="88" width="790" height="96" rx="8" fill="#0f172a"/>
+<rect x="1170" y="88" width="790" height="96" rx="8" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+<text x="1184" y="110" fill="#fde68a" font-size="10" font-weight="700">CÂU CHẨN ĐÚNG BỆNH — 18/07/2026 16:15</text>
+<text x="1184" y="133" class="q">"tại sao thiết kế hệ thống vẫn bị miss những cái tôi đề cập?</text>
+<text x="1184" y="150" class="q">với khối lượng quá lớn tôi không check hết được, do logic không biết</text>
+<text x="1184" y="167" class="q">hay do giả định và tự làm hay không hiểu hoàn cảnh hệ thống?"</text>
+
+<!-- TIMELINE -->
+<rect x="40" y="204" width="1920" height="92" rx="8" fill="rgba(15,23,42,0.85)" stroke="#475569" stroke-width="1"/>
+<text x="54" y="224" fill="#e2e8f0" font-size="10" font-weight="700">4 LẦN AUDIT KHÔNG CHẶN ĐƯỢC LỖI MỚI — vì yêu cầu chỉ nằm trong hội thoại, nói xong là mất</text>
+<line x1="80" y1="252" x2="1900" y2="252" stroke="#475569" stroke-width="2"/>
+
+<circle cx="150" cy="252" r="7" fill="#fb7185"/><text x="150" y="243" class="s8" text-anchor="middle">04/07</text>
+<text x="150" y="272" class="n" text-anchor="middle">audit 1</text><text x="150" y="285" class="s8" text-anchor="middle">ra danh sách lỗi</text>
+
+<circle cx="430" cy="252" r="7" fill="#fb7185"/><text x="430" y="243" class="s8" text-anchor="middle">05/07</text>
+<text x="430" y="272" class="n" text-anchor="middle">audit 2</text><text x="430" y="285" class="s8" text-anchor="middle">như trên — không chặn lỗi mới</text>
+
+<circle cx="760" cy="252" r="7" fill="#fb7185"/><text x="760" y="243" class="s8" text-anchor="middle">18/07</text>
+<text x="760" y="272" class="n" text-anchor="middle">audit 3</text><text x="760" y="285" class="s8" text-anchor="middle">phát hiện ohlcv nhiều source / dòng trùng</text>
+
+<circle cx="1180" cy="252" r="8" fill="#fbbf24"/><text x="1180" y="243" class="s8" text-anchor="middle">25–27/07</text>
+<text x="1180" y="272" class="amb" text-anchor="middle">audit 4 → QUYẾT ĐỊNH ĐẬP ĐI LÀM LẠI</text>
+<text x="1180" y="285" class="s8" text-anchor="middle">"có mỗi ohlcv mà hỏng sau 4 lần audit vẫn không sửa được?"</text>
+
+<circle cx="1620" cy="252" r="7" fill="#34d399"/><text x="1620" y="243" class="s8" text-anchor="middle">29/07–02/08</text>
+<text x="1620" y="272" class="ok" text-anchor="middle">ver 2 — DB riêng quant_v2</text>
+<text x="1620" y="285" class="s8" text-anchor="middle">vẫn phát sinh: trộn nguồn (219 bậc giả), spec lệch code</text>
+
+<!-- ================= 6 BRANCHES ================= -->
+<text x="40" y="332" fill="#fb7185" font-size="12" font-weight="700">SÁU NHÁNH HỎNG CỦA VER 1 — và ver 2 chữa bằng cách nào</text>
+
+<!-- B1 -->
+<rect x="40" y="348" width="620" height="216" rx="8" fill="#0f172a"/>
+<rect x="40" y="348" width="620" height="216" rx="8" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="56" y="372" class="t12">① BẢNG GIÁ SỬA ĐƯỢC</text>
+<text x="56" y="392" class="warn">Job đêm XOÁ SẠCH backfill — 5 đêm liền, không ai biết</text>
+<text x="56" y="406" class="warn">Dữ liệu cũ bị ghi đè, không có bản nào để đối chiếu</text>
+<text x="56" y="420" class="warn">Không phân biệt "phiên xảy ra" với "lúc ta thấy"</text>
+<line x1="56" y1="432" x2="644" y2="432" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="56" y="450" class="ok">VER 2 CHỮA:</text>
+<text x="56" y="466" class="n">REVOKE UPDATE, DELETE trên schema obs + ALTER DEFAULT PRIVILEGES</text>
+<text x="56" y="480" class="n">→ Postgres CƯỠNG CHẾ, không phải quy ước. Đã chứng minh cổng phân</text>
+<text x="56" y="493" class="n">   biệt được hai trạng thái: gỡ quyền → sửa được; trả quyền → bị chặn</text>
+<text x="56" y="509" class="n">observed_at tách khỏi trade_date · băm nội dung payload_hash</text>
+<text x="56" y="525" class="amb">Mã kiểm: C-05 (quyền ghi) · C-07 (chống trùng) · bất biến I5</text>
+<text x="56" y="545" class="s8">Cái giá phải trả: kho tăng ~630k dòng/năm nếu giữ mọi bản quan sát</text>
+<text x="56" y="557" class="s8">— chưa có chính sách giữ/xoá, xem mục "còn treo" ở dưới</text>
+
+<!-- B2 -->
+<rect x="680" y="348" width="620" height="216" rx="8" fill="#0f172a"/>
+<rect x="680" y="348" width="620" height="216" rx="8" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="696" y="372" class="t12">② TRỘN NGUỒN TRONG MỘT CHUỖI</text>
+<text x="696" y="392" class="warn">Round-robin giữa các nguồn — hết nguồn này rơi sang nguồn kia</text>
+<text x="696" y="406" class="warn">Hai nguồn có MẶT BẰNG ĐIỀU CHỈNH KHÁC NHAU ⇒ bậc giá GIẢ</text>
+<text x="696" y="420" class="warn">219 bậc giả · SHP nhảy ×12 qua lại mà không có sự kiện nào</text>
+<line x1="696" y1="432" x2="1284" y2="432" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="696" y="450" class="ok">VER 2 CHỮA:</text>
+<text x="696" y="466" class="n">CHỐT MỘT NGUỒN CHO TOÀN CHUỖI MỖI MÃ — quyết định ở cấp MÃ,</text>
+<text x="696" y="479" class="n">không phải cấp DÒNG. iBoard trừ khi thủng &gt;10% thì mới rơi DNSE.</text>
+<text x="696" y="495" class="n">Không so "nguồn nào nhiều dòng hơn": quy tắc đó chọn NHẦM đúng những</text>
+<text x="696" y="508" class="n">mã DNSE sai (SHP: iBoard 3.499 dòng từ 2010 vs DNSE 3.535 từ 2012)</text>
+<text x="696" y="527" class="amb">Mã kiểm: C-12 (nhảy &gt;50% không có sự kiện) · bất biến I6, I7</text>
+<text x="696" y="547" class="warn">⚠ Lỗi này TÁI PHÁT trong ver 2: sửa view px_adj mà QUÊN hàm</text>
+<text x="696" y="559" class="warn">   px_adj_as_of() — hai lần, lần hai ngay trong cùng phiên</text>
+
+<!-- B3 -->
+<rect x="1320" y="348" width="640" height="216" rx="8" fill="#0f172a"/>
+<rect x="1320" y="348" width="640" height="216" rx="8" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="1336" y="372" class="t12">③ TRỘN THANG GIÁ VÀ NGỮ NGHĨA</text>
+<text x="1336" y="392" class="warn">Lẫn thang ×1000 — kVND và VND cùng nằm một cột</text>
+<text x="1336" y="406" class="warn">Trộn raw và adj trong cùng một bảng, không cột nào phân biệt</text>
+<text x="1336" y="420" class="warn">CTG 2013 close = 6đ · VIX 2014 close &gt; 200.000đ — lọt vào kho</text>
+<line x1="1336" y1="432" x2="1944" y2="432" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="1336" y="450" class="ok">VER 2 CHỮA:</text>
+<text x="1336" y="466" class="n">CHECK price_unit + CHECK price_basis ở cấp cột — Postgres từ chối ghi</text>
+<text x="1336" y="482" class="n">meta.source_contract khai đơn vị/thang của TỪNG nguồn; obs GIỮ NGUYÊN</text>
+<text x="1336" y="495" class="n">đơn vị nguồn, quy đổi là việc của tầng đọc market (×1000 khi cần)</text>
+<text x="1336" y="511" class="n">C-02 neo thang giá so close phiên trước, nới biên nếu là ex_date</text>
+<text x="1336" y="530" class="amb">Mã kiểm: C-06 (đơn vị) · C-02 (thang giá) · C-01 (logic OHLC)</text>
+<text x="1336" y="549" class="s8">Ver 2 vẫn dính một lần: thêm nguồn thứ 3 khác đơn vị làm neo lấy nhầm</text>
+<text x="1336" y="561" class="s8">nguồn ⇒ 2.610 dòng ĐÚNG bị chặn oan. Chính job bắt được khi chạy.</text>
+
+<!-- B4 -->
+<rect x="40" y="584" width="620" height="204" rx="8" fill="#0f172a"/>
+<rect x="40" y="584" width="620" height="204" rx="8" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="56" y="608" class="t12">④ NUỐT LỖI IM LẶNG</text>
+<text x="56" y="628" class="warn">get_vn100() tụt 100 → 30 mã, chỉ ghi log.warning rồi chạy tiếp</text>
+<text x="56" y="642" class="warn">Scraper nuốt exception → trả 0 dòng suốt NHIỀU THÁNG, báo OK</text>
+<text x="56" y="656" class="warn">events() mặc định chỉ lấy 6/30 sự kiện — phân trang không ai kiểm</text>
+<text x="56" y="670" class="warn">Máy tắt một hôm → thủng ngày ÂM THẦM MÃI MÃI, không ai biết</text>
+<line x1="56" y1="682" x2="644" y2="682" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="56" y="700" class="ok">VER 2 CHỮA:</text>
+<text x="56" y="716" class="n">C-03 nguồn trả RỖNG khi đáng lẽ có data ⇒ FAIL, không phải warning</text>
+<text x="56" y="730" class="n">C-04 phân trang: totalElements PHẢI khớp số dòng nhận được</text>
+<text x="56" y="744" class="n">C-08 đủ mã · C-09 đủ ngày SO VỚI LỊCH SÀN (không suy từ bảng giá)</text>
+<text x="56" y="758" class="n">ops.fetch_log ghi TỪNG MÃ TỪNG NGÀY, có cột ngay_thieu liệt kê đúng ngày</text>
+<text x="56" y="777" class="amb">ops.status: dead-man 36h — trả lời được KỂ CẢ khi mọi job đã chết im</text>
+
+<!-- B5 -->
+<rect x="680" y="584" width="620" height="204" rx="8" fill="#0f172a"/>
+<rect x="680" y="584" width="620" height="204" rx="8" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="696" y="608" class="t12">⑤ TỰ SUY THAY VÌ ĐO — VÀ GÕ CỨNG</text>
+<text x="696" y="628" class="warn">Lịch giao dịch GÕ CỨNG ngày nghỉ → lỗi B10, VỠ 2 LẦN</text>
+<text x="696" y="642" class="warn">Biên độ trần/sàn gán cứng 7%/10%/15% — mà biên độ ĐỔI THEO THỜI GIAN</text>
+<text x="696" y="656" class="warn">Múi giờ ICT/UTC lệch nhau → observed_at &lt; trade_date</text>
+<text x="696" y="670" class="warn">"9/10 lỗi của phiên trước do ĐO TỪ KHO thay vì đo từ NGUỒN"</text>
+<line x1="696" y1="682" x2="1284" y2="682" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="696" y="700" class="ok">VER 2 CHỮA:</text>
+<text x="696" y="716" class="n">Lịch DẪN XUẤT TỪ CHỈ SỐ (obs.index_daily) — không bao giờ hết hạn</text>
+<text x="696" y="730" class="n">Biên độ SUY TỪ DỮ LIỆU: C + F = 2R ⇒ R = (C+F)/2, không cần biết biên độ</text>
+<text x="696" y="744" class="n">C-10 observed_at ≥ trade_date · sổ E#### có cột "đo từ đâu": API/KHO/CODE</text>
+<text x="696" y="758" class="n">Kiểm kê nguồn THEO HOST, không theo endpoint → meta.vendor_door + khoá ngoại</text>
+<text x="696" y="777" class="amb">Đo được: gán cứng biên độ làm 38–82% ex-date trước 2013 báo lệch oan</text>
+
+<!-- B6 -->
+<rect x="1320" y="584" width="640" height="204" rx="8" fill="#0f172a"/>
+<rect x="1320" y="584" width="640" height="204" rx="8" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="1336" y="608" class="t12">⑥ DÒNG TRÙNG — KHÔNG KHỬ THEO NỘI DUNG</text>
+<text x="1336" y="628" class="warn">Chạy lại job là ghi trùng — khoá chính có observed_at nên "khác dòng"</text>
+<text x="1336" y="642" class="warn">Lỗi feed DNSE 2022-12-27: 93/100 mã có bar THỪA trong cùng ngày</text>
+<text x="1336" y="656" class="warn">Audit lần 3 (18/07) mới phát hiện: "ohlcv nhiều source / dòng trùng"</text>
+<line x1="1336" y1="668" x2="1944" y2="668" stroke="#475569" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="1336" y="686" class="ok">VER 2 CHỮA:</text>
+<text x="1336" y="702" class="n">payload_hash — chỉ mục unique trên NỘI DUNG, không phải trên khoá</text>
+<text x="1336" y="716" class="n">INSERT ... ON CONFLICT DO NOTHING ⇒ chạy lại bao nhiêu lần cũng idempotent</text>
+<text x="1336" y="730" class="n">Thử nghiệm xoá 1 tuần rồi vá lại: 1.339/1.339 · 0 thiếu · 0 thừa · 0 khác</text>
+<text x="1336" y="749" class="warn">⚠ NHƯNG ver 2 lặp ĐÚNG lỗi này BA LẦN — mỗi lần thêm một bảng vào obs</text>
+<text x="1336" y="762" class="warn">   lại quên phần đã chữa: price_daily (1.026) → corp_action (690) →</text>
+<text x="1336" y="775" class="warn">   index_daily (4 bản sao mỗi dòng, 71.967 thay vì 17.998)</text>
+
+<!-- ============ META PATTERN ============ -->
+<rect x="40" y="812" width="1920" height="168" rx="10" fill="#0f172a"/>
+<rect x="40" y="812" width="1920" height="168" rx="10" fill="rgba(120,53,15,0.32)" stroke="#fbbf24" stroke-width="2.5"/>
+<text x="1000" y="838" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">KHUÔN LỖI CHUNG — sáu nhánh trên KHÔNG phải sáu lỗi khác nhau</text>
+<text x="1000" y="866" fill="#fde68a" font-size="15" font-weight="700" text-anchor="middle">"Sửa đúng chỗ TRIỆU CHỨNG xuất hiện, không truy các HỆ QUẢ CÒN LẠI của cùng một quyết định."</text>
+
+<text x="60" y="898" class="n">Bằng chứng rõ nhất — quyết định "iBoard là nguồn CHÍNH" (chốt 02/08) chạm 5 chỗ. Ngày đầu làm 1/5. Bốn chỗ còn lại lộ dần trong 3 ngày, mỗi lần đều do người dùng hỏi hoặc do một phép kiểm nổ:</text>
+<rect x="60" y="908" width="352" height="26" rx="4" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1"/>
+<text x="236" y="925" class="ok" text-anchor="middle">① tầng đọc market.px_adj — LÀM NGÀY ĐẦU</text>
+<rect x="428" y="908" width="352" height="26" rx="4" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="1"/>
+<text x="604" y="925" class="warn" text-anchor="middle">② job hằng ngày — quên, chạy DNSE suốt 5 ngày</text>
+<rect x="796" y="908" width="352" height="26" rx="4" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="1"/>
+<text x="972" y="925" class="warn" text-anchor="middle">③ phép kiểm tuổi nguồn — quên</text>
+<rect x="1164" y="908" width="352" height="26" rx="4" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="1"/>
+<text x="1340" y="925" class="warn" text-anchor="middle">④ batch chay_hang_ngay.bat — quên</text>
+<rect x="1532" y="908" width="408" height="26" rx="4" fill="rgba(136,19,55,0.35)" stroke="#fb7185" stroke-width="1"/>
+<text x="1736" y="925" class="warn" text-anchor="middle">⑤ hàm px_adj_as_of() — quên, phát hiện 03/08</text>
+
+<text x="60" y="957" class="ok">CHỮA (07/08): test_bat_bien.py — 10 BẤT BIẾN CẤU TRÚC. Khác test_spec_vs_code.py ở chỗ: file kia hỏi "phép kiểm trong đặc tả đã cài chưa?", file này hỏi "quyết định đã áp cho MỌI chỗ nó chạm chưa?"</text>
+<text x="60" y="972" class="s8">Đã chứng minh phân biệt được hai trạng thái: gỡ chỉ mục khử trùng → I1 đỏ, trả về → xanh. Gỡ ngưỡng tuổi iBoard → I2 đỏ, trả về → xanh. Nối vào batch bước 7/8, chạy mỗi ngày.</text>
+
+<!-- ============ STILL ALIVE IN VER 2 ============ -->
+<rect x="40" y="1000" width="1920" height="262" rx="10" fill="#0f172a"/>
+<rect x="40" y="1000" width="1920" height="262" rx="10" fill="rgba(136,19,55,0.22)" stroke="#fb7185" stroke-width="2"/>
+<text x="1000" y="1026" fill="#fecdd3" font-size="13" font-weight="700" text-anchor="middle">KHUÔN LỖI CÒN SỐNG TRONG VER 2 — đo trực tiếp trên quant_v2 ngày 2026-08-09, KHÔNG lấy từ tài liệu cũ</text>
+
+<rect x="60" y="1042" width="455" height="200" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="74" y="1063" class="t">A · px_adj_as_of() TRẢ RỖNG TRONG IM LẶNG</text>
+<text x="74" y="1082" class="n">Quan sát sớm nhất trong kho = 2026-08-01.</text>
+<text x="74" y="1095" class="n">Hàm lọc observed_at ≤ as_of ⇒ mốc nào trước đó</text>
+<text x="74" y="1108" class="n">cũng không có gì lọt.</text>
+<text x="74" y="1128" class="s8">VNM 2019-06-03:</text>
+<text x="74" y="1142" class="warn">  as_of 2019-06-03 → RỖNG</text>
+<text x="74" y="1155" class="warn">  as_of 2023-01-05 → RỖNG</text>
+<text x="74" y="1168" class="warn">  as_of 2026-07-31 → RỖNG</text>
+<text x="74" y="1181" class="ok">  as_of 2026-08-02 → 72.960đ</text>
+<text x="74" y="1202" class="warn">Không báo lỗi — trả BẢNG RỖNG. Backtest gọi</text>
+<text x="74" y="1215" class="warn">với mốc quá khứ sẽ im lặng chạy trên 0 dòng.</text>
+<text x="74" y="1234" class="s8">= đúng khuôn ④ "nuốt lỗi im lặng" của ver 1</text>
+
+<rect x="535" y="1042" width="455" height="200" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="549" y="1063" class="t">B · VOLUME KHÔNG BAO GIỜ ĐƯỢC ĐIỀU CHỈNH</text>
+<text x="549" y="1082" class="n">Nguồn chia lại giá nhưng GIỮ NGUYÊN volume:</text>
+<text x="549" y="1099" class="s8">              ô ghi lại   giá đổi   volume đổi</text>
+<text x="549" y="1113" class="n">SSI_IBOARD      6.509     6.481        180</text>
+<text x="549" y="1126" class="n">DNSE           12.596    12.577        208</text>
+<text x="549" y="1146" class="warn">⇒ close_adj × volume SAI đúng bằng hệ số</text>
+<text x="549" y="1163" class="s8">VHM: GTGD trung bình 142 tỷ — số thật 284 tỷ (2,00×)</text>
+<text x="549" y="1180" class="warn">market.px_adj THIẾU cột total_value, nên ai</text>
+<text x="549" y="1193" class="warn">tính GTGD từ view đó chắc chắn nhân sai.</text>
+<text x="549" y="1213" class="ok">market.px_raw.total_value có đủ 578.734 dòng</text>
+<text x="549" y="1226" class="ok">và là số ĐO thật → sửa được ngay</text>
+<text x="549" y="1240" class="s8">= đúng khuôn ③ "trộn ngữ nghĩa" của ver 1</text>
+
+<rect x="1010" y="1042" width="455" height="200" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="1024" y="1063" class="t">C · C-13 ĐÒI MỘT PHÉP DỰNG LẠI BẤT KHẢ THI</text>
+<text x="1024" y="1082" class="n">C-13: thô × TÍCH hệ số = điều chỉnh → 78,1%</text>
+<text x="1024" y="1095" class="n">Ngưỡng đỏ 15% ⇒ ĐỎ VĨNH VIỄN.</text>
+<text x="1024" y="1115" class="n">Tích cần bảng sự kiện ĐỦ 100%. Đo được:</text>
+<text x="1024" y="1132" class="warn">  HOSE, ref nhảy &gt;5%: thiếu 161/1.162 = 13,9%</text>
+<text x="1024" y="1145" class="warn">  HOSE, ref nhảy &gt;2%: thiếu 847/2.505 = 33,8%</text>
+<text x="1024" y="1158" class="warn">  hệ số kiểm chứng được: chỉ 2.889/3.455 = 83,6%</text>
+<text x="1024" y="1178" class="warn">Nó báo đỏ về BẢNG SỰ KIỆN nhưng bị đọc như</text>
+<text x="1024" y="1191" class="warn">báo đỏ về GIÁ — trong khi giá đã được đối</text>
+<text x="1024" y="1204" class="warn">chứng độc lập bằng C-11 và C-14.</text>
+<text x="1024" y="1224" class="ok">Chữa: đổi nhãn thành "độ phủ bảng sự kiện",</text>
+<text x="1024" y="1237" class="ok">đặt ngưỡng theo mức đo được</text>
+
+<rect x="1485" y="1042" width="455" height="200" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+<text x="1499" y="1063" class="t">D · CÒN TREO / CHƯA PHÂN LOẠI</text>
+<text x="1499" y="1082" class="warn">12.723 dòng trong ops.quarantine chưa phân</text>
+<text x="1499" y="1095" class="warn">loại thành "lỗi nguồn, bỏ được" và "lỗi ta,</text>
+<text x="1499" y="1108" class="warn">phải sửa" ⇒ bảng trạng thái cứ vàng mà không</text>
+<text x="1499" y="1121" class="warn">nói được vì gì</text>
+<text x="1499" y="1140" class="warn">132 báo động giả CỐ ĐỊNH mỗi lần chạy: trần/sàn</text>
+<text x="1499" y="1153" class="warn">SSI năm 2021 tính từ giá chưa điều chỉnh —</text>
+<text x="1499" y="1166" class="warn">trọng tài sai, không phải ta sai</text>
+<text x="1499" y="1185" class="warn">px_adj_as_of() chạy &gt;400s — backtest gọi sẽ đau</text>
+<text x="1499" y="1204" class="warn">Thành phần rổ chỉ từ 2026-08-07 ⇒ backtest lùi</text>
+<text x="1499" y="1217" class="warn">xa hơn mốc này dính SURVIVORSHIP BIAS</text>
+<text x="1499" y="1237" class="s8">Chi tiết: issues\TASK-006.md · REVIEW_2026-08-07.md §6</text>
+
+<!-- FOOTER -->
+<text x="40" y="1296" class="s8">Nguồn: C:\Users\OS\Lucius\Projects\PRJ Quantitative Investment\0. Requirements\URD.md §1 · REVIEW_2026-08-07.md §4–5 · 2. Data design\main\BANG_TRA_MA_KIEM.md · issues\TASK-006.md</text>
+<text x="40" y="1312" class="s8">Khối "còn sống trong ver 2" đo trực tiếp bằng truy vấn trên quant_v2 ngày 2026-08-09 — không trích lại tài liệu.</text>
+<text x="40" y="1328" class="s8">Mã C-xx tra ở BANG_TRA_MA_KIEM.md · mã E#### tra ở C:\Users\OS\Lucius\Projects\PRJ quant\09_other\evidence\INDEX.md · bất biến I1–I10 khai trong 3. Build\code\test_bat_bien.py</text>
+
+<rect x="40" y="1348" width="1920" height="42" rx="6" fill="rgba(15,23,42,0.9)" stroke="#334155" stroke-width="1"/>
+<text x="54" y="1366" fill="#e2e8f0" font-size="9" font-weight="700">CHÚ GIẢI</text>
+<rect x="140" y="1357" width="14" height="11" rx="2" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/><text x="162" y="1367" class="s">nhánh hỏng / chỗ đang hỏng</text>
+<rect x="400" y="1357" width="14" height="11" rx="2" fill="rgba(120,53,15,0.32)" stroke="#fbbf24" stroke-width="1.5"/><text x="422" y="1367" class="s">khuôn lỗi chung / trích lời người dùng</text>
+<text x="720" y="1367" class="warn">chữ đỏ = triệu chứng, đo được</text>
+<text x="980" y="1367" class="ok">chữ xanh = ver 2 đã chữa</text>
+<text x="1220" y="1367" class="amb">chữ vàng = mã kiểm cưỡng chế</text>
+<text x="1500" y="1367" class="s8">PRJ Quantitative Investment · van-de-ver1-v1 · 2026-08-09</text>
+<text x="140" y="1382" class="s8">Đọc theo thứ tự: CHẨN ĐOÁN GỐC → 6 nhánh → KHUÔN LỖI CHUNG → CÒN SỐNG TRONG VER 2. Sáu nhánh là triệu chứng; khuôn lỗi chung mới là bệnh.</text>
+</svg>
+    </div>
   </div>
 </main>
 
-<div class="hint">lăn chuột = phóng to · kéo = di chuyển · <kbd>F</kbd> vừa khung · <kbd>1</kbd> 100%</div>
+<div class="hint">bôi đen được chữ · <kbd>Ctrl</kbd>+<kbd>F</kbd> tìm được · giữ <kbd>Space</kbd> để kéo · <kbd>Ctrl</kbd>+lăn để phóng</div>
 
 <script>
 const VIEWS = [
-  { svg:'db-va-luong-chay-v2.svg', png:'db-va-luong-chay-v2@2x.png',
-    meta:'<b>db-va-luong-chay-v2</b><span class="dot">·</span>2026-08-09<span class="dot">·</span>4 tầng dữ liệu + 8 bước job 17:30, kèm tên file code và logic từng bước<span class="dot">·</span>số liệu đo từ quant_v2' },
-  { svg:'van-de-ver1-v1.svg', png:'van-de-ver1-v1@2x.png',
-    meta:'<b>van-de-ver1-v1</b><span class="dot">·</span>2026-08-09<span class="dot">·</span>chẩn đoán gốc → 6 nhánh hỏng → khuôn lỗi chung → 4 khuôn còn sống trong ver 2' }
+  { svg:"db-va-luong-chay-v2.svg", png:"db-va-luong-chay-v2@2x.png", w:2080, h:1500, id:"d0", meta:'<b>db-va-luong-chay-v2</b><span class="dot">·</span>2026-08-12<span class="dot">·</span>4 tầng dữ liệu + 8 bước job 17:30, kèm tên file code và logic từng bước' },
+  { svg:"van-de-ver1-v1.svg", png:"van-de-ver1-v1@2x.png", w:2000, h:1420, id:"d1", meta:'<b>van-de-ver1-v1</b><span class="dot">·</span>2026-08-12<span class="dot">·</span>chẩn đoán gốc → 6 nhánh hỏng → khuôn lỗi chung → 4 khuôn còn sống trong ver 2' }
 ];
-const MIN = .05, MAX = 8;
-const st = [ {z:1,x:0,y:0,ready:false}, {z:1,x:0,y:0,ready:false} ];
-let cur = 0;
+const MIN = .15, MAX = 6;
+const z = VIEWS.map(() => 1);
+let cur = 0, space = false;
 
 const $ = id => document.getElementById(id);
-const stage = i => $('s'+i), canvas = i => $('c'+i), img = i => canvas(i).querySelector('img');
+const stage = i => $('s' + i);
+const svgEl = i => $(VIEWS[i].id);
 
-function headerH(){
-  const h = $('hdr').offsetHeight;
-  document.documentElement.style.setProperty('--hh', h+'px');
-}
+function headerH(){ document.documentElement.style.setProperty('--hh', $('hdr').offsetHeight + 'px'); }
+
 function apply(i){
-  const s = st[i];
-  canvas(i).style.transform = `translate(${s.x}px, ${s.y}px) scale(${s.z})`;
-  if (i === cur) $('pct').textContent = Math.round(s.z*100)+'%';
+  const v = VIEWS[i];
+  svgEl(i).style.width = (v.w * z[i]) + 'px';
+  if (i === cur) $('pct').textContent = Math.round(z[i] * 100) + '%';
 }
-function natural(i){
-  const im = img(i);
-  return { w: im.naturalWidth || im.width, h: im.naturalHeight || im.height };
+function setZoom(i, nz, ax, ay){
+  const st = stage(i), old = z[i];
+  nz = Math.max(MIN, Math.min(MAX, nz));
+  if (nz === old) return;
+  // giu diem duoi con tro dung yen
+  const cx = (st.scrollLeft + (ax ?? st.clientWidth / 2)) / old;
+  const cy = (st.scrollTop  + (ay ?? st.clientHeight / 2)) / old;
+  z[i] = nz; apply(i);
+  st.scrollLeft = cx * nz - (ax ?? st.clientWidth / 2);
+  st.scrollTop  = cy * nz - (ay ?? st.clientHeight / 2);
 }
 function fit(i){
-  const st_ = stage(i), n = natural(i);
-  if (!n.w || !n.h) return;
-  if (st_.clientWidth < 80 || st_.clientHeight < 80) return;   // khung chua co kich thuoc
-  const pad = 24;
-  const z = Math.min((st_.clientWidth-pad*2)/n.w, (st_.clientHeight-pad*2)/n.h);
-  st[i].z = Math.max(MIN, Math.min(MAX, z));
-  st[i].x = (st_.clientWidth  - n.w*st[i].z)/2;
-  st[i].y = (st_.clientHeight - n.h*st[i].z)/2;
-  apply(i);
-}
-function actual(i){
-  const st_ = stage(i), n = natural(i);
-  st[i].z = 1;
-  st[i].x = (st_.clientWidth  - n.w)/2;
-  st[i].y = (st_.clientHeight - n.h)/2;
-  apply(i);
-}
-function zoomAt(i, factor, cx, cy){
-  const s = st[i];
-  const nz = Math.max(MIN, Math.min(MAX, s.z*factor));
-  const k = nz/s.z;
-  s.x = cx - (cx - s.x)*k;
-  s.y = cy - (cy - s.y)*k;
-  s.z = nz;
-  apply(i);
-}
-function centerZoom(f){
-  const st_ = stage(cur);
-  zoomAt(cur, f, st_.clientWidth/2, st_.clientHeight/2);
+  const st = stage(i);
+  if (st.clientWidth < 80) return;
+  setZoom(i, (st.clientWidth - 56) / VIEWS[i].w);
 }
 
-// pan
-[0,1].forEach(i => {
-  const st_ = stage(i);
-  let down = false, px = 0, py = 0;
-  st_.addEventListener('pointerdown', e => {
-    down = true; px = e.clientX; py = e.clientY;
-    st_.classList.add('drag'); st_.setPointerCapture(e.pointerId);
-  });
-  st_.addEventListener('pointermove', e => {
-    if (!down) return;
-    st[i].x += e.clientX - px; st[i].y += e.clientY - py;
-    px = e.clientX; py = e.clientY; apply(i);
-  });
-  const up = e => { down = false; st_.classList.remove('drag'); };
-  st_.addEventListener('pointerup', up);
-  st_.addEventListener('pointercancel', up);
-  st_.addEventListener('wheel', e => {
+VIEWS.forEach((v, i) => {
+  const st = stage(i);
+  st.addEventListener('wheel', e => {
+    if (!e.ctrlKey && !e.metaKey) return;          // khong Ctrl thi cuon binh thuong
     e.preventDefault();
-    const r = st_.getBoundingClientRect();
-    zoomAt(i, e.deltaY < 0 ? 1.12 : 1/1.12, e.clientX - r.left, e.clientY - r.top);
+    const r = st.getBoundingClientRect();
+    setZoom(i, z[i] * (e.deltaY < 0 ? 1.12 : 1 / 1.12), e.clientX - r.left, e.clientY - r.top);
   }, { passive:false });
-  st_.addEventListener('dblclick', e => {
-    const r = st_.getBoundingClientRect();
-    zoomAt(i, 1.6, e.clientX - r.left, e.clientY - r.top);
+
+  let down = false, px = 0, py = 0;
+  st.addEventListener('pointerdown', e => {
+    if (!space && e.button !== 1) return;          // chi keo khi giu Space hoac chuot giua
+    down = true; px = e.clientX; py = e.clientY;
+    st.classList.add('grabbing'); st.setPointerCapture(e.pointerId); e.preventDefault();
   });
-  img(i).addEventListener('load', () => {
-    if (!st[i].ready) { st[i].ready = true; fit(i); }
+  st.addEventListener('pointermove', e => {
+    if (!down) return;
+    st.scrollLeft -= e.clientX - px; st.scrollTop -= e.clientY - py;
+    px = e.clientX; py = e.clientY;
   });
-  if (img(i).complete && img(i).naturalWidth) { st[i].ready = true; }
+  const up = () => { down = false; st.classList.remove('grabbing'); };
+  st.addEventListener('pointerup', up);
+  st.addEventListener('pointercancel', up);
 });
 
 function show(i){
   cur = i;
-  [0,1].forEach(k => stage(k).hidden = (k !== i));
-  document.querySelectorAll('.tab').forEach(t =>
-    t.setAttribute('aria-selected', String(+t.dataset.v === i)));
+  VIEWS.forEach((v, k) => stage(k).hidden = (k !== i));
+  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(+t.dataset.v === i)));
   $('meta').innerHTML = VIEWS[i].meta;
   $('dlsvg').href = VIEWS[i].svg;
   $('dlpng').href = VIEWS[i].png;
-  headerH();
-  if (!st[i].ready && img(i).complete && img(i).naturalWidth) st[i].ready = true;
-  if (st[i].ready && st[i].z === 1 && st[i].x === 0 && st[i].y === 0) fit(i); else apply(i);
+  headerH(); apply(i);
 }
 
-document.querySelectorAll('.tab').forEach(t =>
-  t.addEventListener('click', () => show(+t.dataset.v)));
-$('in').onclick  = () => centerZoom(1.25);
-$('out').onclick = () => centerZoom(1/1.25);
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => show(+t.dataset.v)));
+$('in').onclick  = () => setZoom(cur, z[cur] * 1.25);
+$('out').onclick = () => setZoom(cur, z[cur] / 1.25);
 $('fit').onclick = () => fit(cur);
-$('one').onclick = () => actual(cur);
+$('one').onclick = () => setZoom(cur, 1);
 
 addEventListener('keydown', e => {
-  if (e.target.matches('input,textarea')) return;
+  if (e.code === 'Space' && !space) {
+    space = true; stage(cur).classList.add('pan');
+    if (e.target === document.body) e.preventDefault();
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
   const k = e.key.toLowerCase();
   if (k === 'f') fit(cur);
-  else if (k === '1') actual(cur);
-  else if (k === '+' || k === '=') centerZoom(1.25);
-  else if (k === '-' || k === '_') centerZoom(1/1.25);
-  else if (k === 'arrowright' || k === 'arrowleft') show(cur === 0 ? 1 : 0);
+  else if (k === '1') setZoom(cur, 1);
+  else if (k === '+' || k === '=') setZoom(cur, z[cur] * 1.25);
+  else if (k === '-' || k === '_') setZoom(cur, z[cur] / 1.25);
 });
-addEventListener('resize', () => { headerH(); fit(cur); });
+addEventListener('keyup', e => {
+  if (e.code === 'Space') { space = false; VIEWS.forEach((v, i) => stage(i).classList.remove('pan', 'grabbing')); }
+});
+addEventListener('resize', headerH);
 
-headerH();
-show(0);
-[0,1].forEach(i => { if (st[i].ready) fit(i); });
+headerH(); show(0); fit(0); VIEWS.forEach((v, i) => { if (i) fit(i); });
 </script>
 </body>
 </html>
