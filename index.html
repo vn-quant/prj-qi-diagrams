@@ -144,6 +144,7 @@ function natural(i){
 function fit(i){
   const st_ = stage(i), n = natural(i);
   if (!n.w || !n.h) return;
+  if (st_.clientWidth < 80 || st_.clientHeight < 80) return;   // khung chua co kich thuoc
   const pad = 24;
   const z = Math.min((st_.clientWidth-pad*2)/n.w, (st_.clientHeight-pad*2)/n.h);
   st[i].z = Math.max(MIN, Math.min(MAX, z));
