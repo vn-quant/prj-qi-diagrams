@@ -148,8 +148,18 @@ html = f"""<!doctype html>
   /* Chu la TEXT THAT: chon duoc, Ctrl+F tim duoc, va net o moi muc phong
      vi phong bang width/height chu khong phai transform: scale(). */
   .pad svg{{display:block; height:auto}}
-  .stage.pan{{cursor:grab; user-select:none}}
-  .stage.pan.grabbing{{cursor:grabbing}}
+
+  /* Hai che do, giong cong cu ban tay cua trinh xem PDF.
+     KEO la mac dinh — so do kho lon, cuon ngang rat bat tien. */
+  .stage.m-keo{{cursor:grab; user-select:none; -webkit-user-select:none}}
+  .stage.m-keo.dang-keo{{cursor:grabbing}}
+  .stage.m-chon{{cursor:auto; user-select:text; -webkit-user-select:text}}
+  .stage.m-chon svg text{{cursor:text}}
+
+  .seg{{display:flex; border:1px solid var(--edge); border-radius:6px; overflow:hidden}}
+  .seg .btn{{border:0; border-radius:0; height:26px; font-size:11px; color:var(--dim)}}
+  .seg .btn + .btn{{border-left:1px solid var(--edge)}}
+  .seg .btn[aria-pressed="true"]{{background:rgba(59,130,246,.25); color:#fff}}
 
   .hint{{
     position:fixed; right:14px; bottom:12px; z-index:15; font-size:10.5px; color:var(--dim);
@@ -173,6 +183,10 @@ html = f"""<!doctype html>
     </div>
     <div class="spacer"></div>
     <div class="tools">
+      <div class="seg">
+        <button class="btn" id="mKeo" aria-pressed="true"  title="Kéo thả để di chuyển (H)">✋ kéo</button>
+        <button class="btn" id="mChon" aria-pressed="false" title="Bôi đen chữ (V)">⌶ chọn chữ</button>
+      </div>
       <button class="btn" id="out" title="Thu nhỏ (−)">−</button>
       <div class="pct" id="pct">100%</div>
       <button class="btn" id="in" title="Phóng to (+)">+</button>
@@ -189,7 +203,7 @@ html = f"""<!doctype html>
   {stages}
 </main>
 
-<div class="hint">bôi đen được chữ · <kbd>Ctrl</kbd>+<kbd>F</kbd> tìm được · giữ <kbd>Space</kbd> để kéo · <kbd>Ctrl</kbd>+lăn để phóng</div>
+<div class="hint">kéo thả để di chuyển · <kbd>V</kbd> đổi sang chọn chữ (<kbd>H</kbd> quay lại kéo) · <kbd>Ctrl</kbd>+lăn để phóng · <kbd>Ctrl</kbd>+<kbd>F</kbd> tìm chữ</div>
 
 <script>
 const VIEWS = [
@@ -197,7 +211,7 @@ const VIEWS = [
 ];
 const MIN = .15, MAX = 6;
 const z = VIEWS.map(() => 1);
-let cur = 0, space = false;
+let cur = 0, space = false, cheDo = 'keo';   // mac dinh KEO, giong cong cu ban tay cua PDF
 
 const $ = id => document.getElementById(id);
 const stage = i => $('s' + i);
@@ -238,19 +252,35 @@ VIEWS.forEach((v, i) => {{
 
   let down = false, px = 0, py = 0;
   st.addEventListener('pointerdown', e => {{
-    if (!space && e.button !== 1) return;          // chi keo khi giu Space hoac chuot giua
+    // Cham tay thi de trinh duyet cuon tu nhien, dung cuop su kien.
+    if (e.pointerType !== 'mouse') return;
+    // Keo khi: chuot giua · giu Space · hoac chuot trai trong che do KEO.
+    if (!(e.button === 1 || space || (e.button === 0 && cheDo === 'keo'))) return;
     down = true; px = e.clientX; py = e.clientY;
-    st.classList.add('grabbing'); st.setPointerCapture(e.pointerId); e.preventDefault();
+    st.classList.add('dang-keo'); st.setPointerCapture(e.pointerId); e.preventDefault();
   }});
   st.addEventListener('pointermove', e => {{
     if (!down) return;
     st.scrollLeft -= e.clientX - px; st.scrollTop -= e.clientY - py;
     px = e.clientX; py = e.clientY;
   }});
-  const up = () => {{ down = false; st.classList.remove('grabbing'); }};
+  const up = () => {{ down = false; st.classList.remove('dang-keo'); }};
   st.addEventListener('pointerup', up);
   st.addEventListener('pointercancel', up);
 }});
+
+// ── che do: KEO (mac dinh) hoac CHON CHU ──────────────────────────────────
+function datCheDo(m){{
+  cheDo = m;
+  VIEWS.forEach((v, i) => {{
+    stage(i).classList.toggle('m-keo', m === 'keo');
+    stage(i).classList.toggle('m-chon', m === 'chon');
+  }});
+  $('mKeo').setAttribute('aria-pressed', String(m === 'keo'));
+  $('mChon').setAttribute('aria-pressed', String(m === 'chon'));
+}}
+$('mKeo').onclick  = () => datCheDo('keo');
+$('mChon').onclick = () => datCheDo('chon');
 
 function show(i){{
   cur = i;
@@ -269,24 +299,30 @@ $('fit').onclick = () => fit(cur);
 $('one').onclick = () => setZoom(cur, 1);
 
 addEventListener('keydown', e => {{
+  // Giu Space: tam thoi keo duoc ke ca dang o che do chon chu.
   if (e.code === 'Space' && !space) {{
-    space = true; stage(cur).classList.add('pan');
+    space = true; stage(cur).classList.add('m-keo');
     if (e.target === document.body) e.preventDefault();
     return;
   }}
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   const k = e.key.toLowerCase();
-  if (k === 'f') fit(cur);
+  if (k === 'h') datCheDo('keo');
+  else if (k === 'v') datCheDo('chon');
+  else if (k === 'f') fit(cur);
   else if (k === '1') setZoom(cur, 1);
   else if (k === '+' || k === '=') setZoom(cur, z[cur] * 1.25);
   else if (k === '-' || k === '_') setZoom(cur, z[cur] / 1.25);
 }});
 addEventListener('keyup', e => {{
-  if (e.code === 'Space') {{ space = false; VIEWS.forEach((v, i) => stage(i).classList.remove('pan', 'grabbing')); }}
+  if (e.code !== 'Space') return;
+  space = false;
+  VIEWS.forEach((v, i) => stage(i).classList.remove('dang-keo'));
+  datCheDo(cheDo);                       // tra lai che do dang chon
 }});
 addEventListener('resize', headerH);
 
-headerH(); show(0); fit(0); VIEWS.forEach((v, i) => {{ if (i) fit(i); }});
+headerH(); datCheDo('keo'); show(0); fit(0); VIEWS.forEach((v, i) => {{ if (i) fit(i); }});
 </script>
 </body>
 </html>
